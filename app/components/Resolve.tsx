@@ -15,103 +15,102 @@ import {
 export function ProblemSection() {
   const items = [
     {
-      icon: <TrendingUp className="h-5 w-5" />,
+      icon: <TrendingUp className="h-6 w-6" />,
       title: "Competitividad real",
-      desc: "Incrementar la competitividad de MyPymes y Startups mexicanas con foco en crecimiento y expansión.",
+      desc: "Elevamos el nivel de PyMEs y Startups mexicanas para que dejen de sobrevivir y empiecen a liderar.",
     },
     {
-      icon: <Layers className="h-5 w-5" />,
-      title: "Modelos de negocio optimizados",
-      desc: "Aplicar metodologías modernas para mejorar operación, ejecución y escalabilidad.",
+      icon: <Layers className="h-6 w-6" />,
+      title: "Modelos optimizados",
+      desc: "Implementamos metodologías ágiles que mejoran la operación, ejecución y permiten la escalabilidad.",
     },
     {
-      icon: <Target className="h-5 w-5" />,
-      title: "Mayor valor agregado",
-      desc: "Generación de valor en producto/servicio, procesos, marca y experiencia del cliente.",
+      icon: <Target className="h-6 w-6" />,
+      title: "Valor agregado",
+      desc: "Transformamos productos y servicios genéricos en experiencias de marca de alto valor percibido.",
     },
     {
-      icon: <ShieldCheck className="h-5 w-5" />,
-      title: "Estándares internacionales",
-      desc: "Fortalecer el mercado interno con estándares y buenas prácticas globales, adaptadas a México.",
+      icon: <ShieldCheck className="h-6 w-6" />,
+      title: "Estándares globales",
+      desc: "Fortalecemos el mercado interno adoptando las mejores prácticas internacionales, adaptadas a México.",
     },
     {
-      icon: <Globe2 className="h-5 w-5" />,
-      title: "Competir afuera y entrar a nichos",
-      desc: "Capacidad de competir en mercados internacionales y acceder a nichos especializados.",
+      icon: <Globe2 className="h-6 w-6" />,
+      title: "Acceso a nichos",
+      desc: "Preparamos a la empresa para competir fuera de la caja y entrar en mercados especializados.",
     },
     {
-      icon: <Network className="h-5 w-5" />,
+      icon: <Network className="h-6 w-6" />,
       title: "Ecosistema e inversión",
-      desc: "Relación con clusters sectoriales y programas regionales de innovación para atraer inversión pública y privada.",
+      desc: "Conectamos con clusters clave y programas de innovación para atraer capital inteligente.",
     },
   ]
 
   return (
-    <section className="w-full px-[clamp(16px,4vw,64px)] pt-10 sm:pt-14 pb-10 sm:pb-14">
-      <div className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-white">
-        {/* light accents */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_18%_18%,rgba(37,99,235,0.10),transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(800px_520px_at_78%_22%,rgba(16,185,129,0.10),transparent_55%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.04)_0%,rgba(0,0,0,0.02)_55%,rgba(0,0,0,0.00)_100%)]" />
-        </div>
+    <section className="relative w-full bg-slate-50 py-24 sm:py-32">
+      
+      {/* Background Shapes: Manchas de color muy sutiles para romper el blanco plano */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[80px] mix-blend-multiply" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-100/40 rounded-full blur-[80px] mix-blend-multiply" />
+      </div>
 
-        <div className="relative p-6 sm:p-10 lg:p-12">
-          {/* Header row: title left / meta+buttons right */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-start">
-            {/* Left */}
-            <div>
-              <h2 className="text-[1.9rem] sm:text-[2.6rem] lg:text-[3.2rem] leading-[1] tracking-tight font-semibold text-black">
-                Hacer que MyPymes y Startups mexicanas compitan con estándares globales.
-              </h2>
-
-              <p className="mt-4 max-w-2xl text-black/70 text-sm sm:text-base lg:text-lg leading-relaxed">
-                La iniciativa responde a una necesidad clara: elevar competitividad, profesionalizar la operación y
-                construir una cadena de valor moderna que permita crecer en México y expandirse a mercados
-                internacionales.
-              </p>
+      <div className="relative container mx-auto px-6 lg:px-8">
+        
+        {/* Header Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-end">
+          
+          {/* Left: Headline */}
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 mb-6 shadow-sm">
+              <BriefcaseBusiness className="h-3.5 w-3.5 text-blue-600" />
+              Nuestra Misión
             </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1]">
+              Hacemos que México compita con <span className="text-blue-600">estándares globales.</span>
+            </h2>
+          </div>
 
-            {/* Right: subtitle + buttons */}
-            <div className="lg:pt-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-xs text-black/70">
-                <BriefcaseBusiness className="h-4 w-4" />
-                Problema que resolvemos
-              </div>
-
-              <div className="mt-4 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-stretch">
-                <button className="inline-flex items-center justify-center gap-2 rounded-full bg-black text-white px-6 py-3 text-sm font-medium hover:bg-black/90 transition">
-                  Ver enfoque <ArrowRight className="h-4 w-4" />
-                </button>
-
-                <button className="inline-flex items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 text-sm font-medium text-black hover:bg-black/[0.03] transition">
+          {/* Right: Description & CTA */}
+          <div className="lg:pl-10">
+            <p className="text-lg text-slate-600 leading-relaxed mb-8">
+              Respondemos a una urgencia clara: profesionalizar la operación y construir una cadena de valor moderna que permita crecer localmente y expandirse internacionalmente.
+            </p>
+            <div className="flex flex-wrap gap-4">
+               <button className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-slate-800 hover:ring-4 hover:ring-slate-200">
+                  Ver enfoque estratégico
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+               </button>
+               <button className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors">
                   Descargar resumen
-                </button>
-              </div>
-
-              <p className="mt-4 text-xs sm:text-sm text-black/55 leading-relaxed">
-                Enfoque: metodologías modernas, estándares internacionales y conexión con ecosistema (clusters,
-                innovación e inversión).
-              </p>
+               </button>
             </div>
           </div>
-
-          {/* Grid */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {items.map((it) => (
-              <div
-                key={it.title}
-                className="rounded-[1.5rem] border border-black/10 bg-white/70 backdrop-blur-sm p-5 shadow-sm hover:bg-white transition"
-              >
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.03] px-3 py-1 text-xs text-black/70">
-                  {it.icon}
-                  {it.title}
-                </div>
-                <p className="mt-4 text-sm text-black/65 leading-relaxed">{it.desc}</p>
-              </div>
-            ))}
-          </div>
         </div>
+
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {items.map((item, idx) => (
+            <div
+              key={item.title}
+              className="group relative flex flex-col items-start rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-blue-900/5 hover:-translate-y-1 hover:border-blue-100"
+            >
+              {/* Icon Box */}
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
+                {item.icon}
+              </div>
+              
+              <h3 className="mb-3 text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {item.title}
+              </h3>
+              
+              <p className="text-base text-slate-500 leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   )

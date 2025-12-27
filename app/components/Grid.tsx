@@ -11,66 +11,66 @@ type Logo = {
 type Props = {
   eyebrow?: string
   title: string
+  subtitle?: string
   logos: Logo[]
-  theme?: "light" | "dark"
 }
 
 export function LogoGrids({
-  eyebrow = "Partners",
+  eyebrow = "Nuestros Aliados",
   title,
+  subtitle,
   logos,
-  theme = "light",
 }: Props) {
-  const isDark = theme === "dark"
-
   return (
-    <section className={isDark ? "bg-[#050505] text-white" : "bg-white text-black"}>
-      {/* ✅ contenedor centrado con max 800px */}
-      <div className="mx-auto w-full max-w-[800px] px-4 sm:px-6 py-10 sm:py-14">
-        {/* ✅ desktop: 50/50, texto arriba; mobile: todo centrado */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 lg:items-start items-center text-center lg:text-left">
-          {/* Left text */}
-          <div className="self-start">
-            <div
-              className={
-                isDark
-                  ? "text-xs uppercase tracking-wider text-white/55"
-                  : "text-xs uppercase tracking-wider text-black/50"
-              }
-            >
-              {eyebrow}
-            </div>
-            <h3 className="mt-2 text-lg sm:text-xl font-semibold tracking-tight">
-              {title}
-            </h3>
+    <section className="w-full bg-white py-20 sm:py-24 border-t border-slate-100">
+      <div className="container mx-auto px-6 lg:px-8">
+        
+        {/* Header Centrado */}
+        <div className="mx-auto max-w-2xl text-center mb-16">
+          <div className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 mb-4">
+             {eyebrow}
           </div>
-
-          {/* Right logos */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-9 gap-y-7">
-            {logos.map((l) => {
-              const Wrapper: any = l.href ? "a" : "div"
-              return (
-                <Wrapper
-                  key={l.name}
-                  href={l.href}
-                  className="opacity-80 hover:opacity-100 transition"
-                  aria-label={l.name}
-                  title={l.name}
-                >
-                  <img
-                    src={l.src}
-                    alt={l.name}
-                    className="h-6 sm:h-7 w-auto object-contain"
-                    style={{
-
-                    }}
-                    loading="lazy"
-                  />
-                </Wrapper>
-              )
-            })}
-          </div>
+          
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">
+            {title}
+          </h2>
+          
+          {subtitle && (
+            <p className="text-lg text-slate-600">
+              {subtitle}
+            </p>
+          )}
         </div>
+
+        {/* Grid de Logos */}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+          {logos.map((logo) => {
+            const Wrapper: any = logo.href ? "a" : "div"
+            
+            return (
+              <Wrapper
+                key={logo.name}
+                href={logo.href}
+                className="group relative flex h-24 sm:h-32 items-center justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-6 transition-all duration-300 hover:border-slate-200 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1"
+                aria-label={logo.name}
+              >
+                {/* Logo Image with Grayscale Effect */}
+                <img
+                  src={logo.src}
+                  alt={logo.name}
+                  className="max-h-8 sm:max-h-10 w-auto object-contain opacity-40 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-110"
+                  loading="lazy"
+                />
+              </Wrapper>
+            )
+          })}
+        </div>
+        
+        {/* Bottom text (Optional trust indicator) */}
+        <div className="mt-12 text-center">
+
+        </div>
+
       </div>
     </section>
   )

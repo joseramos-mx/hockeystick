@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useMemo, useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ChevronRight, Layers, Layout, Zap, Users, Lightbulb, Cog, TrendingUp, MonitorPlay } from "lucide-react"
 
 type BusinessLine = {
   id: string
@@ -10,6 +10,7 @@ type BusinessLine = {
   description: string
   image: string
   meta?: string
+  icon: React.ElementType
 }
 
 export function BusinessShowcase() {
@@ -21,8 +22,9 @@ export function BusinessShowcase() {
         title: "Desarrollo de Proyectos",
         description:
           "Convertimos ideas en ejecución: planificación, estructura, entregables y seguimiento para lograr resultados medibles.",
-        image: "/investment.png",
+        image: "/investment.png", // Asegúrate de tener una imagen real aquí
         meta: "Línea de negocio • Entrega rápida",
+        icon: Layout,
       },
       {
         id: "programa",
@@ -32,6 +34,7 @@ export function BusinessShowcase() {
           "Implementamos metodologías modernas para escalar operación, ventas y estandarización interna sin fricción.",
         image: "/investment.png",
         meta: "Crecimiento • Metodología",
+        icon: TrendingUp,
       },
       {
         id: "implante",
@@ -41,6 +44,7 @@ export function BusinessShowcase() {
           "Intervenimos áreas clave para elevar performance: procesos, métricas, propuesta de valor y comercialización.",
         image: "/investment.png",
         meta: "Optimización • KPI",
+        icon: Zap,
       },
       {
         id: "iguala",
@@ -50,6 +54,7 @@ export function BusinessShowcase() {
           "Soporte continuo para institucionalizar procesos y mantener mejora permanente con foco en utilidades.",
         image: "/investment.png",
         meta: "Retainer • Soporte",
+        icon: Layers,
       },
       {
         id: "workshop",
@@ -59,6 +64,7 @@ export function BusinessShowcase() {
           "Sesiones intensivas para alinear equipo, priorizar roadmap y activar acciones en 1–3 días.",
         image: "/investment.png",
         meta: "Intensivo • 1–3 días",
+        icon: MonitorPlay,
       },
       {
         id: "lab",
@@ -68,6 +74,7 @@ export function BusinessShowcase() {
           "Diseñamos, probamos y validamos iniciativas con enfoque de innovación aplicada y resultados.",
         image: "/investment.png",
         meta: "Innovación • Validación",
+        icon: Lightbulb,
       },
       {
         id: "jobshop",
@@ -77,6 +84,7 @@ export function BusinessShowcase() {
           "Ejecutamos tareas críticas: documentación, sistemas, funnels, automatización y entregables listos.",
         image: "/investment.png",
         meta: "Ejecución • Entregables",
+        icon: Cog,
       },
       {
         id: "empowerment",
@@ -86,15 +94,7 @@ export function BusinessShowcase() {
           "Elevamos capacidades del equipo con frameworks claros para operar mejor y tomar mejores decisiones.",
         image: "/investment.png",
         meta: "Equipo • Capacitación",
-      },
-      {
-        id: "coach",
-        label: "COACH",
-        title: "Business Coaching & Co-Active",
-        description:
-          "Acompañamiento estratégico para líderes: claridad, decisiones, ejecución y disciplina operativa.",
-        image: "/investment.png",
-        meta: "Liderazgo • Coaching",
+        icon: Users,
       },
     ],
     []
@@ -104,87 +104,108 @@ export function BusinessShowcase() {
   const active = items.find((x) => x.id === activeId) ?? items[0]!
 
   return (
-    <section className="w-full px-[clamp(16px,4vw,64px)] mt-10 sm:mt-14 mb-10 sm:mb-14">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-stretch">
-        {/* MAIN PANEL */}
-        <div className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm h-[420px] lg:h-[560px]">
-          <div
-            className="absolute inset-0 bg-center bg-cover"
-            style={{ backgroundImage: `url(${active.image})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
-          <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_30%_20%,rgba(255,255,255,0.10),transparent_60%)]" />
+    <section className="w-full bg-slate-50 py-24 sm:py-32">
+      <div className="container mx-auto px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="mb-12 md:mb-16 max-w-2xl">
+           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-4">
+             Nuestras Líneas de Negocio
+           </h2>
+           <p className="text-lg text-slate-600">
+             Soluciones flexibles diseñadas para cada etapa de crecimiento de tu empresa.
+           </p>
+        </div>
 
-          <div className="relative h-full p-6 sm:p-10 flex flex-col justify-end">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white/85">
-                {active.meta ?? "Línea de negocio"}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_450px] gap-8 items-stretch h-[600px] lg:h-[650px]">
+          
+          {/* LEFT: MAIN PREVIEW PANEL */}
+          <div className="relative group overflow-hidden rounded-3xl bg-slate-900 shadow-2xl h-full flex flex-col justify-end transition-all duration-500">
+            
+            {/* Background Image with Zoom Effect */}
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-105"
+              style={{ backgroundImage: `url(${active.image})` }}
+            />
+            
+            {/* Gradient Overlays for Readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent opacity-90" />
+            
+            {/* Content Content */}
+            <div className="relative z-10 p-8 sm:p-10 lg:p-12">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md mb-6">
+                <active.icon className="h-3.5 w-3.5" />
+                {active.meta}
               </div>
 
-              <h3 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white">
-                {active.title}
-              </h3>
+              <div className="overflow-hidden">
+                <h3 key={active.title + "title"} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 animate-in slide-in-from-bottom-4 duration-500 fade-in">
+                  {active.title}
+                </h3>
+                
+                <p key={active.title + "desc"} className="text-lg text-slate-300 leading-relaxed max-w-xl mb-8 animate-in slide-in-from-bottom-6 duration-700 fade-in fill-mode-backwards delay-100">
+                  {active.description}
+                </p>
+              </div>
 
-              <p className="mt-3 text-sm sm:text-base lg:text-lg text-white/85 leading-relaxed">
-                {active.description}
-              </p>
-
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <button className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-black px-6 py-3 text-sm font-medium hover:bg-gray-200 transition">
-                  Ver detalles <ArrowRight className="h-4 w-4" />
+              <div className="flex flex-wrap gap-4 animate-in fade-in duration-1000 delay-200">
+                <button className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-200 transition-colors">
+                  Explorar servicio <ArrowRight className="h-4 w-4" />
                 </button>
-                <button className="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-medium text-white hover:bg-white/15 transition">
+                <button className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition-colors backdrop-blur-sm">
                   Agendar llamada
                 </button>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* RIGHT: SCROLL CONTAINER */}
-<div className="rounded-[2rem] border border-black/10 bg-white shadow-sm overflow-hidden h-[520px] lg:h-[560px] flex flex-col min-h-0">
-  {/* Header fixed */}
-  <div className="flex items-center justify-between px-5 py-4 border-b border-black/10 shrink-0">
-    <div className="text-sm font-semibold text-black">Líneas de negocio</div>
-    <div className="text-xs text-black/50">{items.length}</div>
-  </div>
+          {/* RIGHT: NAVIGATION LIST */}
+          <div className="flex flex-col h-full bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="p-5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Selecciona una opción</span>            </div>
+            
+            <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">
+              {items.map((item) => {
+                const isActive = activeId === item.id
+                const Icon = item.icon
 
-  {/* Scroll area */}
-  <div className="flex-1 min-h-0 overflow-y-auto p-4 pb-10 space-y-4">
-    {items.map((it) => {
-      const isActive = it.id === activeId
-      return (
-        <button
-          key={it.id}
-          onClick={() => setActiveId(it.id)}
-          className={[
-            "relative w-full text-left rounded-[1.5rem] overflow-hidden border transition focus:outline-none",
-            "focus:ring-2 focus:ring-black/15",
-            isActive ? "border-black/20" : "border-black/10 hover:border-black/20",
-            isActive ? "min-h-[132px]" : "min-h-[104px]",
-          ].join(" ")}
-          aria-pressed={isActive}
-        >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${it.image})` }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/15" />
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveId(item.id)}
+                    className={`group relative w-full text-left p-4 rounded-xl transition-all duration-300 border ${
+                      isActive
+                        ? "bg-slate-900 border-slate-900 shadow-lg scale-[1.02]"
+                        : "bg-white border-transparent hover:bg-slate-50 hover:border-slate-200"
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors ${
+                        isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500 group-hover:bg-slate-200 group-hover:text-slate-700"
+                      }`}>
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className={`text-sm font-semibold truncate transition-colors ${isActive ? "text-white" : "text-slate-700"}`}>
+                           {item.title}
+                        </div>
+                        <div className={`text-xs truncate transition-colors ${isActive ? "text-slate-400" : "text-slate-400"}`}>
+                           {item.label}
+                        </div>
+                      </div>
 
-          <div className="relative p-4 sm:p-5">
-            <div className="text-[11px] uppercase tracking-wider text-white/70">{it.label}</div>
-            <div className="mt-1 text-lg sm:text-xl font-semibold text-white leading-tight">{it.title}</div>
-            {isActive && (
-              <p className="mt-2 text-xs sm:text-sm text-white/85 leading-relaxed line-clamp-3">
-                {it.description}
-              </p>
-            )}
+                      {isActive && (
+                         <ChevronRight className="h-4 w-4 text-white animate-in slide-in-from-left-2 fade-in" />
+                      )}
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
-          {isActive && <div className="absolute inset-0 ring-1 ring-white/25" />}
-        </button>
-      )
-    })}
-  </div>
-</div>
-
+        </div>
       </div>
     </section>
   )

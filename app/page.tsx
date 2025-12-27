@@ -1,62 +1,58 @@
 import Image from "next/image";
-import HeroSection from "./components/Hero";
 import { PartnerSection } from "./components/Partner";
 import { ProblemSection } from "./components/Resolve";
 import { BusinessShowcase } from "./components/Showcase";
-import { FooterDark } from "./components/Footer";
+import { Footer } from "./components/Footer";
 import { LogoGrids } from "./components/Grid";
+import ModernHeroSplit from "./components/Hero";
 
 export default function Home() {
   return (
     <div className=" min-h-screen items-center justify-center bg-white font-sans">
-     <HeroSection/>
+     <ModernHeroSplit/>
      <PartnerSection/>
      <ProblemSection/>
-     
      <BusinessShowcase/>
      <LogoGrids
-  eyebrow="Clientes satisfechos"
-  title="Empresas que confían en nosotros"
+  eyebrow="Confianza"
+  title="Empresas que impulsamos"
+  subtitle="Colaboramos con organizaciones líderes para transformar sus sectores."
   logos={[
-    { name: "GrayGridss", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconss", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIs", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsq", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsq", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIq", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsf", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsf", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIf", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsr", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsr", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIr", src: "/logoipsum-414.svg", href: "#" },
-    
-    // agrega los que quieras...
+    { name: "Empresa 1", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 2", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 3", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 4", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+    { name: "Empresa 5", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 6", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 7", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 8", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+    { name: "Empresa 9", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 10", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 11", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 12", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+
   ]}
-  theme="light"
 />
 <LogoGrids
   eyebrow="Nuestros Formadores"
   title="Nuestra capacitación está respaldada por"
   logos={[
-    { name: "GrayGridss", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconss", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIs", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsq", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsq", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIq", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsf", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsf", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIf", src: "/logoipsum-414.svg", href: "#" },
-        { name: "GrayGridsr", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Lineiconsr", src: "/logoipsum-414.svg", href: "#" },
-    { name: "Ayro UIr", src: "/logoipsum-414.svg", href: "#" },
-    
-    // agrega los que quieras...
-  ]}
-  theme="light"
+    { name: "Empresa 1", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 2", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 3", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 4", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+    { name: "Empresa 5", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 6", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 7", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 8", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+    { name: "Empresa 9", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
+    { name: "Empresa 10", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
+    { name: "Empresa 11", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
+    { name: "Empresa 12", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+
+      ]}
 />
-     <FooterDark/>
+     <Footer/>
     </div>
   );
 }

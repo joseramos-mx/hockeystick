@@ -1,163 +1,155 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
-import { Github, Linkedin, Twitter, Instagram } from "lucide-react"
-import MetallicPaint, { parseLogoImage } from "./MetallicPaint"
+import React from "react"
+import { Instagram, Linkedin, Twitter, Send, MapPin, Mail, Facebook } from "lucide-react"
 
-type FooterColumn = {
-  title: string
-  links: { label: string; href: string }[]
-}
-
-export function FooterDark() {
-  const [mounted, setMounted] = useState(false)
-  const [imageData, setImageData] = useState<ImageData | null>(null)
-
-  // ✅ Debe existir en /public
-  const logoUrl = "/hsmxb.svg"
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
-    let alive = true
-
-    async function loadDefaultImage() {
-      try {
-        const response = await fetch(logoUrl)
-        if (!response.ok) throw new Error(`Failed to fetch logo: ${response.status}`)
-
-        const blob = await response.blob()
-        const file = new File([blob], "hsmxb.svg", { type: blob.type })
-
-        const parsedData = await parseLogoImage(file)
-        if (alive) setImageData(parsedData?.imageData ?? null)
-      } catch (err) {
-        console.error("Error loading default image:", err)
-        if (alive) setImageData(null)
-      }
-    }
-
-    loadDefaultImage()
-
-    return () => {
-      alive = false
-    }
-  }, [mounted, logoUrl])
-
-  const columns: FooterColumn[] = [
-    {
-      title: "PRODUCTO",
-      links: [
-        { label: "Features", href: "#" },
-        { label: "Pricing", href: "#" },
-      ],
-    },
-    {
-      title: "PLATAFORMA",
-      links: [
-        { label: "Servicios", href: "#" },
-        { label: "Metodología", href: "#" },
-      ],
-    },
-    {
-      title: "SOPORTE",
-      links: [
-        { label: "Docs", href: "#" },
-        { label: "Contacto", href: "#" },
-      ],
-    },
-    {
-      title: "COMPAÑÍA",
-      links: [
-        { label: "About", href: "#" },
-        { label: "Privacidad", href: "#" },
-      ],
-    },
-  ]
-
+export function Footer() {
   return (
-    <footer className="bg-[#050505] text-white">
-      <div className="px-[clamp(16px,4vw,64px)] py-12 sm:py-16">
-        <div className="border border-white/10 bg-white/[0.03] overflow-hidden rounded-[2rem]">
-          <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full border border-white/15 bg-white/5 grid place-items-center">
-                <span className="text-sm font-semibold">H</span>
-              </div>
-              <div className="text-xs uppercase tracking-wider text-white/60">
-                Hockeystick MX
-              </div>
+    // IMPORTANTE: 'pb-24' añade espacio extra abajo para que el botón flotante no tape nada
+    <footer className="relative w-full bg-[#050505] text-white overflow-hidden pt-20 pb-3 border-t border-white/10">
+      
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-blue-900/20 blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-red-900/10 blur-[128px] pointer-events-none" />
+
+      <div className="relative container mx-auto px-6 lg:px-8">
+        
+        {/* TOP SECTION: CTA & CONTACT FORM */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-20">
+          
+          {/* Left: Headline & Info */}
+          <div>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
+              ¿Listo para escalar tu <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+                siguiente nivel?
+              </span>
+            </h2>
+            <p className="text-lg text-white/60 mb-8 max-w-md">
+              Hablemos sobre cómo podemos estructurar, optimizar y potenciar tu operación. Sin compromisos.
+            </p>
+            
+            <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3 text-sm text-white/80">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10">
+                        <Mail className="h-4 w-4" />
+                    </div>
+                    <span>contacto@hockeystick.mx</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-white/80">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10">
+                        <MapPin className="h-4 w-4" />
+                    </div>
+                    <span>CDMX, México</span>
+                </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr]">
-            <div className="px-6 sm:px-8 py-8 sm:py-10">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-                {columns.map((col) => (
-                  <div key={col.title}>
-                    <div className="text-[11px] uppercase tracking-wider text-white/45">
-                      {col.title}
-                    </div>
-                    <ul className="mt-4 space-y-3">
-                      {col.links.map((l) => (
-                        <li key={l.label}>
-                          <a href={l.href} className="text-sm text-white/75 hover:text-white transition">
-                            {l.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="border-t lg:border-t-0 lg:border-l border-white/10 p-6 sm:p-8">
-              <div className="w-full rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-[11px] uppercase tracking-wider text-white/45">
-                  Mascot / Marca
+          {/* Right: Simple Contact Form */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <form className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-xs font-medium uppercase tracking-wider text-white/50">Nombre</label>
+                  <input 
+                    type="text" 
+                    id="name"
+                    placeholder="Tu nombre" 
+                    className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
                 </div>
-
-                <div className="mt-4 relative w-full aspect-square rounded-2xl overflow-hidden bg-black/20">
-                  {mounted && imageData ? (
-                    <MetallicPaint
-                      imageData={imageData}
-                      params={{
-                        edge: 2,
-                        patternBlur: 0.005,
-                        patternScale: 2,
-                        refraction: 0.015,
-                        speed: 0.3,
-                        liquid: 0.07,
-                      }}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 grid place-items-center text-xs text-white/55">
-                      {mounted ? "Cargando…" : "Inicializando…"}
-                    </div>
-                  )}
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-xs font-medium uppercase tracking-wider text-white/50">Email</label>
+                  <input 
+                    type="email" 
+                    id="email"
+                    placeholder="tucorreo@empresa.com" 
+                    className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
                 </div>
               </div>
-            </div>
-          </div>
+              
+              <div className="space-y-2">
+                  <label htmlFor="message" className="text-xs font-medium uppercase tracking-wider text-white/50">Mensaje</label>
+                  <textarea 
+                    id="message"
+                    rows={3}
+                    placeholder="Cuéntanos brevemente sobre tu proyecto..." 
+                    className="w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
+              </div>
 
-          <div className="px-6 sm:px-8 py-5 border-t border-white/10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-xs text-white/45">
-              © {new Date().getFullYear()} Hockeystick MX
-            </div>
-
-            <div className="flex items-center gap-4 text-white/55">
-              <a href="#" className="hover:text-white transition" aria-label="Twitter"><Twitter className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-white transition" aria-label="LinkedIn"><Linkedin className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-white transition" aria-label="Instagram"><Instagram className="h-4 w-4" /></a>
-              <a href="#" className="hover:text-white transition" aria-label="GitHub"><Github className="h-4 w-4" /></a>
-            </div>
+              <button type="button" className="group w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black px-6 py-3.5 text-sm font-bold hover:bg-gray-200 transition-all active:scale-[0.98]">
+                Enviar Mensaje
+                <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </form>
           </div>
         </div>
+
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16" />
+
+        {/* MIDDLE SECTION: LINKS */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-20">
+          
+          {/* Brand Column */}
+          <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-2 mb-6">
+                 {/* Asegúrate de que esta imagen exista en /public/hsmx.png */}
+                 <div className="flex items-center justify-start font-bold text-white">
+                    <img src="/hsmx.png" alt="HockeyStick MX" className="h-8 w-auto object-contain" />
+                 </div>            
+              </div>
+
+             <div className="flex gap-4">
+               {[Facebook, Twitter, Linkedin].map((Icon, i) => (
+                 <a key={i} href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 hover:bg-white hover:text-black transition-all">
+                   <Icon className="h-4 w-4" />
+                 </a>
+               ))}  
+             </div>
+          </div>
+          <div>
+            <h4 className="font-semibold text-white mb-6">Empresa</h4>
+            <ul className="space-y-4 text-sm text-white/60">
+              {["Nosotros", "Carreras", "Blog", "Contacto"].map(link => (
+                <li key={link}><a href="#" className="hover:text-white transition-colors">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+             <h4 className="font-semibold text-white mb-6">Legal</h4>
+            <ul className="space-y-4 text-sm text-white/60">
+              {["Privacidad", "Términos", "Cookies"].map(link => (
+                <li key={link}><a href="#" className="hover:text-white transition-colors">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* BOTTOM: COPYRIGHT & POWERED BY RMS */}
+        <div className="flex flex-col md:flex-row items-center md:justify-start gap-4 md:gap-8 pt-8 border-t border-white/5">
+          <p className="text-xs text-white/40 order-2 md:order-1">
+            &copy; {new Date().getFullYear()} HockeyStick MX. Todos los derechos reservados.
+          </p>
+
+          <a 
+            href="https://www.rmsindustries.io" 
+            target="_blank"
+            className="group order-1 md:order-2 flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 transition-colors hover:bg-white/5"
+          >
+            <span className="text-[10px] uppercase tracking-wider text-white/40 group-hover:text-white/60 transition-colors">
+              Powered by
+            </span>
+            <span className="flex items-center justify-center">
+              {/* Asegúrate de que esta imagen exista en /public/rms.svg */}
+              <img src="/rms.svg" alt="RMS" className="h-8 w-8 opacity-80 group-hover:opacity-100 transition-opacity" />
+            </span>
+            <span className="flex h-1.5 w-1.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.6)]"></span>
+          </a>
+        </div>
+
       </div>
     </footer>
   )
