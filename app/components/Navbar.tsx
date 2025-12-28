@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
+import { Menu, X, ChevronDown, ArrowRight, Send } from "lucide-react"
 
 type NavItem = { label: string; href: string }
 type DropItem = { title: string; slug: string }
@@ -37,13 +37,13 @@ export function Navbar() {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
   const dropTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Close on route change
+  // Cierra todo al cambiar de ruta
   useEffect(() => {
     setMobileOpen(false)
     setDropOpen(false)
   }, [pathname])
 
-  // ESC close
+  // ESC para cerrar
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
@@ -55,12 +55,12 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [])
 
-  // Focus close button on open
+  // Focus al botón cerrar cuando abre drawer
   useEffect(() => {
     if (mobileOpen) closeBtnRef.current?.focus()
   }, [mobileOpen])
 
-  // Lock scroll on open
+  // Lock scroll cuando drawer está abierto
   useEffect(() => {
     if (!mobileOpen) return
     const prev = document.body.style.overflow
@@ -69,6 +69,16 @@ export function Navbar() {
       document.body.style.overflow = prev
     }
   }, [mobileOpen])
+
+  // Si pasas a desktop mientras está abierto, ciérralo (evita “X en PC”)
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)") // md
+    const onChange = () => {
+      if (mq.matches) setMobileOpen(false)
+    }
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
 
   const onDropEnter = () => {
     if (dropTimer.current) clearTimeout(dropTimer.current)
@@ -81,32 +91,20 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="border-b border-white/10 bg-black opacity-90 backdrop-blur-lg">
-        <div className="mx-auto h-16 max-w-7xl px-4 p-3 sm:px-6 lg:px-8">
+      <nav className="border-b border-white/10 bg-black p-3 backdrop-blur-lg">
+        <div className="mx-auto h-16 max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* 3 columnas: izquierda logo | centro links | derecha cta+menu */}
           <div className="relative flex h-16 items-center">
             {/* Left: Logo */}
-            <div className="flex items-center gap-2">
-              <Link href="/" className="flex items-center gap-2">
-                <img
-                  className="h-8 w-auto object-contain invert brightness-0"
-                  src="/hsmx.png"
-                  alt="HSMX"
-                />
-              </Link>
+            <Link href="/" className="flex items-center">
+              <img
+                className="h-8 w-auto object-contain invert brightness-0"
+                src="/hsmx.png"
+                alt="HSMX"
+              />
+            </Link>
 
-              <button
-    ref={closeBtnRef}
-    type="button"
-    className="rounded-md p-2 text-white/70 hover:text-white hover:bg-white/10 transition"
-    aria-label="Cerrar menú"
-    onClick={() => setMobileOpen(false)}
-  >
-    <X className="h-6 w-6" />
-  </button>
-            </div>
-
-            {/* Center: Desktop links (true centered with absolute) */}
+            {/* Center: Desktop links */}
             <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-8">
               <Link
                 href={nav[0].href}
@@ -180,9 +178,9 @@ export function Navbar() {
             <div className="ml-auto flex items-center gap-3">
               <Link
                 href="/contacto"
-                className="hidden sm:inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-bold text-black hover:bg-gray-100 transition"
+                className="hidden sm:inline-flex items-center justify-center rounded-full bg-emerald-400/70 px-4 py-2 text-sm font-bold text-white hover:bg-gray-100 transition"
               >
-                Contacto
+                <Send className="h-4 w-4 mr-1"/> Whatsapp
               </Link>
 
               <button
@@ -198,23 +196,24 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer (solo móvil) */}
       {mobileOpen && (
-        <div className="lg:hidden" role="dialog" aria-modal="true">
+        <div className="md:hidden" role="dialog" aria-modal="true">
+          {/* Backdrop */}
           <div
             className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
 
+          {/* Panel */}
           <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-[#09090b] ring-1 ring-white/10">
-            <div className="flex items-center justify-between px-5 py-5 border-b border-white/10">
-              <Link href="/" className="flex items-center gap-2">
+            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
+              <Link href="/" className="flex items-center">
                 <img
-                  className="h-8 w-auto invert brightness-0"
+                  className="h-7 w-auto max-w-[180px] object-contain invert brightness-0"
                   src="/hsmx.png"
                   alt="HSMX"
                 />
-                <span className="text-sm font-bold text-white">HSMX</span>
               </Link>
 
               <button
@@ -243,7 +242,7 @@ export function Navbar() {
 
                 <button
                   type="button"
-                  className="w-full flex items-center justify-between rounded-lg px-3 py-3 text-base font-semibold text-white/90 hover:bg-black/10 transition"
+                  className="w-full flex items-center justify-between rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-white/10 transition"
                   onClick={() => setMobileLinesOpen((v) => !v)}
                   aria-expanded={mobileLinesOpen}
                 >
@@ -258,7 +257,7 @@ export function Navbar() {
                     {businessLines.map((item) => (
                       <Link
                         key={item.slug}
-                        href={`/lineas-de-negocio/${item.slug}`}
+                        href={`/divisiones/${item.slug}`}
                         className="block rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition"
                         onClick={() => setMobileOpen(false)}
                       >
@@ -272,10 +271,10 @@ export function Navbar() {
               <div className="mt-6">
                 <Link
                   href="/contacto"
-                  className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-base font-bold text-black hover:bg-gray-100 transition"
+                  className="flex items-center justify-between rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white hover:bg-gray-100 transition"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Contacto <ArrowRight className="h-5 w-5" />
+                  <Send/>Whatsapp <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
             </div>
