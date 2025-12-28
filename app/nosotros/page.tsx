@@ -19,8 +19,7 @@ export default function AboutPage() {
 
       {/* 1. Header / Navbar */}
       {/* Nota: Si ya tienes el Navbar en tu layout.tsx, borra esta línea */}
-      <Navbar onOpenMenu={() => {}} />
-
+      <Navbar/>
       <main className="relative z-10 pt-32 pb-20 sm:pt-40">
         <div className="container mx-auto px-6 lg:px-8">
           
