@@ -157,7 +157,7 @@ export function Navbar() {
                   {businessLines.map((item) => (
                     <Link
                       key={item.slug}
-                      href={`/lineas-de-negocio/${item.slug}`}
+                      href={`/divisiones/${item.slug}`}
                       role="menuitem"
                       className="block rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
                       onClick={() => setDropOpen(false)}
