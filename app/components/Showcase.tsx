@@ -41,7 +41,7 @@ export function BusinessShowcase() {
         label: "INCUBACIÓN",
         title: "Incubadora Exponencial",
         description:
-          "Transformamos ideas en negocios rentables. [cite_start]Desarrollo de Prototipo, MVP y lanzamiento con acompañamiento 'Empowerment' y método GROW. [cite: 305, 312]",
+          "Transformamos ideas en negocios rentables.  Desarrollo de Prototipo, MVP y lanzamiento con acompañamiento 'Empowerment' y método GROW. [cite: 305, 312]",
         image: "/certificate.png",
         meta: "Startups • MVP",
         icon: Lightbulb, 
@@ -61,7 +61,7 @@ export function BusinessShowcase() {
         label: "FONDOS & M&A",
         title: "Fondos de Inversión y M&A",
         description:
-          "Estructuración financiera para levantar capital (Angel/VC), fusiones y adquisiciones. [cite_start]Preparamos tu empresa para ser auditada e invertida. [cite: 100, 101]",
+          "Estructuración financiera para levantar capital (Angel/VC), fusiones y adquisiciones.  Preparamos tu empresa para ser auditada e invertida. [cite: 100, 101]",
         image: "/angel.png",
         meta: "Capital • Finanzas",
         icon: Layers, 
@@ -71,7 +71,7 @@ export function BusinessShowcase() {
         label: "EDUCACIÓN",
         title: "Universidad HockeyStick",
         description:
-          "Formación disruptiva para el ecosistema emprendedor. [cite_start]Diplomados, Labs y Workshops lúdicos para desarrollar habilidades empresariales reales. [cite: 133, 136]",
+          "Formación disruptiva para el ecosistema emprendedor.  Diplomados, Labs y Workshops lúdicos para desarrollar habilidades empresariales reales. [cite: 133, 136]",
         image: "/universidad.png",
         meta: "Formación • Workshops",
         icon: Users, 
@@ -81,7 +81,7 @@ export function BusinessShowcase() {
         label: "DIGITAL HUB",
         title: "MKT Digital & Digital Hub",
         description:
-          "Transformación digital 4.0/5.0 y automatización de procesos. [cite_start]Marketing exponencial para ventas omnicanal y control de utilidades. [cite: 266, 271]",
+          "Transformación digital 4.0/5.0 y automatización de procesos.  Marketing exponencial para ventas omnicanal y control de utilidades. [cite: 266, 271]",
         image: "/digitalhub.png",
         meta: "Tech 4.0 • Automatización",
         icon: MonitorPlay, 
