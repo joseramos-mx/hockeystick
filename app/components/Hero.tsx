@@ -104,8 +104,7 @@ export default function ModernHeroSplit() {
               </div>
 
               <p className="mb-10 max-w-xl text-lg text-white/60 leading-relaxed">
-                Transformamos tu negocio lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                <span className="text-white/90 font-medium block mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+                Transformamos tu negocio.
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
@@ -151,7 +150,7 @@ export default function ModernHeroSplit() {
             <img
               src={logo.src}
               alt={logo.name}
-              className="h-10 md:h-12 w-auto opacity-30 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+              className="h-10 md:h-12 w-auto opacity-80 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
             />
           </MarqueeItem>
         ))}

@@ -25,7 +25,7 @@ export function Navbar() {
     () => [
       { label: "Inicio", href: "/" },
       { label: "Nosotros", href: "/nosotros" },
-      { label: "Contacto", href: "/#contacto" },
+      { label: "Contacto", href: "/contacto" },
     ],
     []
   )
