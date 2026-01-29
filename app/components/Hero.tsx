@@ -18,7 +18,6 @@ const PARTNER_LOGOS = [
   { name: "Agile Innovation", src: "clientes/rms.svg" },
   { name: "Angel", src: "clientes/acadee.png" },
   { name: "Digital Hub", src: "clientes/clan.png" },
-  { name: "Digital Hub", src: "clientes/clan.png" },
 
 ]
 
