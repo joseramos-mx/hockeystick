@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-const { fontFamily } = require("tailwindcss/defaultTheme"); // Importar defaultTheme
+import defaultTheme from "tailwindcss/defaultTheme"; // 1. Importa el objeto por defecto
 
 const config: Config = {
   content: [
@@ -10,11 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        // Aquí ocurre la magia:
-        // Ponemos tu variable PRIMERO en la pila de fuentes sans
-        sans: ["var(--font-plus-jakarta)", ...fontFamily.sans],
+        // 2. Accede a fontFamily a través de defaultTheme
+        sans: ["var(--font-main)", ...defaultTheme.fontFamily.sans],
       },
-      // ... el resto de tu config
     },
   },
   plugins: [],

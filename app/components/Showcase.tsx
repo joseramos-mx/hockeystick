@@ -1,7 +1,8 @@
 "use client"
 
 import React, { useMemo, useState } from "react"
-import { ArrowRight, ChevronRight, Layers, Layout, Zap, Users, Lightbulb, Cog, TrendingUp, MonitorPlay } from "lucide-react"
+import { ArrowRight, ChevronRight, Layers, Layout, Zap, Users, Lightbulb, Cog, TrendingUp, MonitorPlay, Star } from "lucide-react"
+import Link from "next/link"
 
 type BusinessLine = {
   id: string
@@ -21,8 +22,8 @@ export function BusinessShowcase() {
         label: "GENERAL",
         title: "HockeyStick MX",
         description:
-          "Socio estratégico para incrementar la competitividad de MyPymes y Startups mediante detección de oportunidades, aumento de valor y alianzas estratégicas. [cite: 171, 174]",
-        image: "/agileinnovation.png", // Usando tu imagen de agileinnovation
+          "Socio estratégico para incrementar la competitividad de MyPymes y Startups mediante detección de oportunidades, aumento de valor y alianzas estratégicas.",
+        image: "lineas/compass real.png", // Usando tu imagen de agileinnovation
         meta: "Estrategia • Consultoría",
         icon: Layout, 
       },
@@ -31,8 +32,8 @@ export function BusinessShowcase() {
         label: "ACELERACIÓN",
         title: "Aceleradora Exponencial",
         description:
-          "Diseño de modelos de negocio ágiles (Lean Startup, Growth Hacking) para exponencializar procesos, ventas y utilidades. [cite: 229]",
-        image: "/swat.png", 
+          "Diseño de modelos de negocio ágiles (Lean Startup, Growth Hacking) para exponencializar procesos, ventas y utilidades.",
+        image: "lineas/cohete.png", 
         meta: "Scale-up • Agilidad",
         icon: TrendingUp, 
       },
@@ -41,8 +42,8 @@ export function BusinessShowcase() {
         label: "INCUBACIÓN",
         title: "Incubadora Exponencial",
         description:
-          "Transformamos ideas en negocios rentables.  Desarrollo de Prototipo, MVP y lanzamiento con acompañamiento 'Empowerment' y método GROW. [cite: 305, 312]",
-        image: "/certificate.png",
+          "Transformamos ideas en negocios rentables.  Desarrollo de Prototipo, MVP y lanzamiento con acompañamiento 'Empowerment' y método GROW.",
+        image: "lineas/ajedrez.png",
         meta: "Startups • MVP",
         icon: Lightbulb, 
       },
@@ -51,8 +52,8 @@ export function BusinessShowcase() {
         label: "UNICORNIOS",
         title: "Empresas Unicornio",
         description:
-          "Modelos de escalamiento masivo para competir en ecosistemas exponenciales, usando metodologías de Wharton y construcción de Organizaciones Exponenciales (ExO). [cite: 67, 75]",
-        image: "/unicornio.png",
+          "Modelos de escalamiento masivo para competir en ecosistemas exponenciales, usando metodologías de Wharton y construcción de Organizaciones Exponenciales (ExO). ",
+        image: "/upscalemedia-transformed.png",
         meta: "Escalamiento • ExO",
         icon: Zap, 
       },
@@ -61,8 +62,8 @@ export function BusinessShowcase() {
         label: "FONDOS & M&A",
         title: "Fondos de Inversión y M&A",
         description:
-          "Estructuración financiera para levantar capital (Angel/VC), fusiones y adquisiciones.  Preparamos tu empresa para ser auditada e invertida. [cite: 100, 101]",
-        image: "/angel.png",
+          "Estructuración financiera para levantar capital (Angel/VC), fusiones y adquisiciones.  Preparamos tu empresa para ser auditada e invertida.",
+        image: "lineas/toro.png",
         meta: "Capital • Finanzas",
         icon: Layers, 
       },
@@ -71,8 +72,8 @@ export function BusinessShowcase() {
         label: "EDUCACIÓN",
         title: "Universidad HockeyStick",
         description:
-          "Formación disruptiva para el ecosistema emprendedor.  Diplomados, Labs y Workshops lúdicos para desarrollar habilidades empresariales reales. [cite: 133, 136]",
-        image: "/universidad.png",
+          "Formación disruptiva para el ecosistema emprendedor.  Diplomados, Labs y Workshops lúdicos para desarrollar habilidades empresariales reales.",
+        image: "lineas/cerebro.png",
         meta: "Formación • Workshops",
         icon: Users, 
       },
@@ -81,10 +82,20 @@ export function BusinessShowcase() {
         label: "DIGITAL HUB",
         title: "MKT Digital & Digital Hub",
         description:
-          "Transformación digital 4.0/5.0 y automatización de procesos.  Marketing exponencial para ventas omnicanal y control de utilidades. [cite: 266, 271]",
-        image: "/digitalhub.png",
+          "Transformación digital 4.0/5.0 y automatización de procesos.  Marketing exponencial para ventas omnicanal y control de utilidades.",
+        image: "lineas/math.png",
         meta: "Tech 4.0 • Automatización",
         icon: MonitorPlay, 
+      },
+      {
+        id: "PMO-PMP-agile",
+        label: "PMO & PMP Office",
+        title: "Agile Office",
+        description:
+          "Transformación digital 4.0/5.0 y automatización de procesos.  Marketing exponencial para ventas omnicanal y control de utilidades.",
+        image: "lineas/compass.png",
+        meta: "Tech 4.0 • Automatización",
+        icon: Star, 
       },
     ],
     []
@@ -139,12 +150,17 @@ export function BusinessShowcase() {
               </div>
 
               <div className="flex flex-wrap gap-4 animate-in fade-in duration-1000 delay-200">
+                <Link href={`/divisiones/${active.id}`}>
                 <button className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-200 transition-colors">
                   Explorar servicio <ArrowRight className="h-4 w-4" />
                 </button>
+                </Link>
+                <Link href="/contacto">
                 <button className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white hover:bg-white/10 transition-colors backdrop-blur-sm">
                   Agendar llamada
                 </button>
+                </Link>
+                
               </div>
             </div>
           </div>

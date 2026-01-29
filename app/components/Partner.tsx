@@ -2,6 +2,7 @@
 
 import React from "react"
 import { ArrowRight, CheckCircle2, Sparkles, Layers, Target, TrendingUp } from "lucide-react"
+import Link from "next/link"
 
 export function PartnerSection() {
   return (
@@ -41,9 +42,11 @@ export function PartnerSection() {
                 Agenda una llamada <ArrowRight className="h-4 w-4" />
               </button>
 
+              <Link href="/nosotros">
               <button className="inline-flex h-12 items-center justify-center rounded-full border border-gray-200 bg-white px-8 text-sm font-medium text-gray-700 shadow-sm transition-all hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900">
                 Ver metodología
               </button>
+              </Link>
             </div>
           </div>
 

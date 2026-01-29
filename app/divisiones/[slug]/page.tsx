@@ -6,6 +6,7 @@ import { getServiceBySlug } from "@/lib/business-data"
 import { Navbar } from "../../components/Navbar"
 import { Footer } from "../../components/Footer"
 import { CheckCircle2, Zap, ShieldCheck, HelpCircle, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = React.use(params)
@@ -18,13 +19,15 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
   // Mapeo simple de slug a nombre de archivo de logo (Ajusta según tus archivos reales)
   // Si tienes los archivos en public/, la ruta sería /unicornio.png, etc.
   const logoMap: Record<string, string> = {
-    "hockeystick-mx": "/hockeystick.png", // Ajusta nombre
-    "aceleradora-exponencial": "/logos/swat.png", // Ejemplo
-    "incubadora-exponencial": "/logos/certificate.png", // Ejemplo
+    "hockeystick-mx": "/hsmxb.png", // Ajusta nombre
+    "aceleradora-exponencial": "/logos/agileinnovation.png", // Ejemplo
+    "incubadora-exponencial": "/logos/job shop.png", // Ejemplo
     "empresas-unicornio": "/logos/unicornio.png",
     "fondos-y-ma": "/logos/angel.png",
     "universidad-hockeystick": "/logos/universidad.png",
     "mkt-digital-hub": "/logos/digitalhub.png",
+    "swat": "/logos/swat.png",
+
   }
 
   const logoSrc = logoMap[slug] || "/job shop.png" // Fallback
@@ -52,11 +55,13 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
             {service.shortDesc}
           </p>
-          
+          <Link href="contacto">
           <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 text-white px-8 py-3 text-sm font-bold hover:bg-slate-800 hover:ring-4 hover:ring-slate-200 transition-all">
             Consultar disponibilidad 
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
+          </Link>
+          
         </div>
       </section>
 

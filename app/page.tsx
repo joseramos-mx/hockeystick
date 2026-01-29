@@ -5,54 +5,94 @@ import { BusinessShowcase } from "./components/Showcase";
 import { Footer } from "./components/Footer";
 import { LogoGrids } from "./components/Grid";
 import ModernHeroSplit from "./components/Hero";
+import { Testimonials } from "./components/Testimonials";
 
 export default function Home() {
   return (
     <div className=" min-h-screen items-center justify-center bg-white font-sans">
-     <ModernHeroSplit/>
-     <PartnerSection/>
-     <ProblemSection/>
-     <BusinessShowcase/>
-     <LogoGrids
-  eyebrow="Confianza"
-  title="Empresas que impulsamos"
-  subtitle="Colaboramos con organizaciones líderes para transformar sus sectores."
-  logos={[
-    { name: "Empresa 1", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 2", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 3", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 4", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
-    { name: "Empresa 5", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 6", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 7", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 8", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
-    { name: "Empresa 9", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 10", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 11", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 12", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+      <ModernHeroSplit/>
+      <PartnerSection/>
+      <ProblemSection/>
+      <BusinessShowcase/>
 
-  ]}
-/>
-<LogoGrids
-  eyebrow="Nuestros Formadores"
-  title="Nuestra capacitación está respaldada por"
-  logos={[
-    { name: "Empresa 1", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 2", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 3", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 4", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
-    { name: "Empresa 5", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 6", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 7", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 8", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
-    { name: "Empresa 9", src: "https://placehold.co/200x80/transparent/black?text=Logo+1" },
-    { name: "Empresa 10", src: "https://placehold.co/200x80/transparent/black?text=Logo+2" },
-    { name: "Empresa 11", src: "https://placehold.co/200x80/transparent/black?text=Logo+3" },
-    { name: "Empresa 12", src: "https://placehold.co/200x80/transparent/black?text=Logo+4" },
+      {/* SECCIÓN DE TESTIMONIOS GENERALES */}
+      <Testimonials 
+        data={[
+          {
+            quote: "Hockeystick ha sido un verdadero impulsor para el Clan del Diente. Su asesoría sobre empresas ha sido invaluable, ayudándonos a trazar un camino claro hacia el éxito. Gracias a su experiencia y apoyo, hemos podido superar obstáculos y alcanzar nuestros objetivos de crecimiento de manera sorprendente. Su compromiso y dedicación son realmente impresionantes, y estamos agradecidos por tenerlos como socios en nuestro viaje empresarial.",
+            author: "Jorge Arguello González",
+            role: "Fundador del Clan del Diente y conferencista internacional",
+            image: "people/arguello.webp" 
+          },
+          {
+            quote: "Me di cuenta que navegaba sin ningún rumbo o propósito y pensé esto debe de cambiar ya tengo un “porque” necesito a alguien que me ayude con el “cómo” y me platicaron de este entrenamiento y aquí estamos ya tenemos una visión, unas metas, proyectos bien estructurados y sobretodo con una asesoría y mentoria para lograr los objetivos establecidos y mi negocio realmente hoy si está creciendo.",
+            author: "TPD. Jorge Flores Simental",
+            role: "Dueño fundador del laboratorio Dental Flores",
+            image: "people/jorgeflores.jpeg" 
+          },
+          {
+            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW. ",
+            author: "Marco Aurelio",
+            role: "Fundador de Acadee",
+            image: "people/persona3.jpeg"
+          },
+          {
+            quote: "Este programa fue una verdadera revelación, destacando el valor de los valores como la responsabilidad, el respeto y la justicia en el entorno laboral. Aprendí a ser autosuficiente y, al mismo tiempo, a abrirme emocionalmente para trabajar en equipo, ya que las emociones son igual de importantes que los numeros en los negocios. Estos valores, junto con las habilidades adquiridas, me han preparado para liderar con empatía y eficiencia, aspectos cruciales para el éxito en cualquier colaboración.",
+            author: "Ing. José Ramos",
+            role: "Fundador y CEO de RMS Innovation",
+            image: "people/joseramos.jpg"
+          },
+          {
+            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW. ",
+            author: "Marco Aurelio",
+            role: "Fundador de Acadee",
+            image: "people/persona3.jpeg"
+          },
+          {
+            quote: "Muy agradecido. Una experiencia diferente un cambio de ideas, de paradigmas. Un proceso de crecimiento de los colaboradores y del negocio. Una inyección necesaria de energías.",
+            author: "Dr. Felipe de Jesús Ramos",
+            role: "Fundador de Central Médica Santa Ana y RG Servicios Médicos Integrales",
+            image: "people/ramos.jpg"
+          }
+        ]} 
+      />
 
-      ]}
-/>
-     <Footer/>
+      <section id="clientes">
+        <LogoGrids
+          eyebrow="Confianza"
+          title="Empresas que impulsamos"
+          subtitle="Colaboramos con organizaciones líderes para transformar sus sectores."
+          logos={[
+            { name: "Empresa 1", src: "/clientes/merril lynch.jpg" },
+            { name: "Empresa 2", src: "/clientes/baker.jpeg" },
+            { name: "Empresa 3", src: "/clientes/dentalflores.jpeg" },
+            { name: "Empresa 4", src: "/clientes/vital.jpeg" },
+            { name: "Empresa 5", src: "/clientes/rms.svg" },
+            { name: "Empresa 6", src: "/clientes/rmszahn.svg" },
+            { name: "Empresa 7", src: "/clientes/netflix.webp" },
+            { name: "Empresa 8", src: "/clientes/cmsa.webp" },
+          ]}
+        />
+      </section>
+
+      <LogoGrids
+        eyebrow="Nuestros Formadores"
+        title="Nuestra capacitación está respaldada por"
+        logos={[
+          { name: "Harvard", src: "/formadores/HARVARD.svg" },
+          { name: "Cambridge", src: "/formadores/CAMBRIDGE.png" },
+          { name: "IPN", src: "/formadores/IPN.webp" },
+          { name: "ITAM", src: "/formadores/ITAM.svg" },
+          { name: "nasa", src: "/formadores/nasa.jpg" },
+          { name: "ods", src: "/formadores/ods.png" },
+          { name: "Pachuca", src: "/formadores/pachuca.png" },
+          { name: "onudi", src: "/formadores/onudi.png" },
+          { name: "onu", src: "/formadores/onu.jpg" },
+          { name: "iasp", src: "/formadores/iasp.png" },
+        ]}
+      />
+      
+      <Footer/>
     </div>
   );
 }

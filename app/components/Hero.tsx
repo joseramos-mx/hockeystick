@@ -2,23 +2,30 @@
 
 import React, { useState, useEffect } from "react"
 import { ArrowRight, Sparkles } from "lucide-react"
-// 1. IMPORTAMOS EL NAVBAR INDEPENDIENTE
 import { Navbar } from "../components/Navbar" 
 import { InvestmentTeaserCard } from "./Investment-teaser"
 import BlurText from "./BlurText"
 import {
   Marquee,
   MarqueeContent,
-  MarqueeFade,
   MarqueeItem,
 } from "@/components/kibo-ui/marquee"
+import Link from "next/link"
 
-// --- Componente: Teaser de Inversión ---
+// 1. DEFINIMOS TUS LOGOS LOCALES
+// Asegúrate de que estos nombres coincidan exactamente con tus archivos en /public
+const PARTNER_LOGOS = [
+  { name: "Agile Innovation", src: "clientes/rms.svg" },
+  { name: "Angel", src: "clientes/acadee.png" },
+  { name: "Certificate", src: "clientes/altatecnica dental.png" },
+  { name: "Digital Hub", src: "clientes/clan.png" },
+
+]
+
 function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
   const [isVisible, setIsVisible] = useState(false)
 
-  // Efecto de entrada suave
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 1000)
     return () => clearTimeout(timer)
@@ -34,7 +41,6 @@ function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boo
             onClick={() => setIsOpen(false)}
             className="absolute -top-3 -right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-[#1A1F36] text-white/70 shadow-lg transition hover:bg-white hover:text-black"
           >
-            {/* Usamos X de texto o importamos el icono si lo necesitas, aquí simplificado */}
             <span className="text-sm">✕</span>
           </button>
           <div className="overflow-hidden rounded-4xl border border-white/10 bg-[#070B1C]/90 shadow-2xl backdrop-blur-md">
@@ -59,10 +65,7 @@ function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boo
   )
 }
 
-// --- Página Principal ---
 export default function ModernHeroSplit() {
-  // YA NO NECESITAMOS ESTADO PARA EL MENÚ AQUÍ
-
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[#090d1d] text-white font-sans selection:bg-red-500/30">
       
@@ -73,7 +76,6 @@ export default function ModernHeroSplit() {
         <div className="absolute right-[-5%] top-40 -z-10 h-[500px] w-[500px] rounded-full bg-rose-600/15 blur-[300px]"></div>
       </div>
 
-      {/* 2. USAMOS EL COMPONENTE IMPORTADO */}
       <Navbar />
 
       <main className="relative z-10 flex min-h-screen flex-col justify-center pt-28 pb-20 sm:pt-32 lg:pt-40">
@@ -111,9 +113,11 @@ export default function ModernHeroSplit() {
                   Empezar Ahora
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </button>
+                <Link href="#clientes">
                 <button className="inline-flex h-14 items-center justify-center rounded-full border border-white/10 bg-white/5 px-8 text-base font-medium text-white transition-all hover:bg-white/10 hover:border-white/25">
                   Ver Casos de Éxito
                 </button>
+                </Link>
               </div>
             </div>
 
@@ -133,26 +137,28 @@ export default function ModernHeroSplit() {
           </div>
 
           {/* Social Proof */}
-          <div className="mt-24 lg:mt-32 border-t border-white/5 pt-10">
-            <p className="text-left text-sm font-semibold text-white/40 mb-6 uppercase tracking-widest">
-              NUESTROS ALIADOS ESTRATEGICOS
-            </p>
-            <div className="relative flex w-full overflow-hidden mask-gradient-x">
-                <Marquee className="[--duration:40s] [--gap:3rem]">
-                  <MarqueeContent>
-                    {new Array(8).fill(null).map((_, index) => (
-                      <MarqueeItem key={index}>
-                          <img
-                          src={`https://placehold.co/140x50/000000/FFFFFF/png?text=Partner+${index+1}`}
-                          alt="Client Logo"
-                          className="h-10 w-auto opacity-30 grayscale transition-all duration-300 hover:opacity-80 hover:grayscale-0"
-                        />
-                      </MarqueeItem>
-                    ))}
-                  </MarqueeContent>
-                </Marquee>
-            </div>
-          </div>
+<div className="mt-24 lg:mt-32 border-t border-white/5 pt-10">
+  <p className="text-left text-sm font-semibold text-white/40 mb-6 uppercase tracking-widest">
+    NUESTROS ALIADOS ESTRATEGICOS
+  </p>
+  <div className="relative flex w-full overflow-hidden mask-gradient-x">
+    {/* Agregamos el gap directamente al Marquee si el componente lo permite via props */}
+    <Marquee className="[--duration:40s] [--gap:5rem]"> 
+      <MarqueeContent>
+        {/* Unimos los logos y los duplicamos para asegurar que el scroll sea infinito y el gap se respete */}
+        {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((logo, index) => (
+          <MarqueeItem key={index} className="mx-10 md:mx-12"> {/* FORZAMOS EL ESPACIO AQUÍ */}
+            <img
+              src={logo.src}
+              alt={logo.name}
+              className="h-10 md:h-12 w-auto opacity-30 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            />
+          </MarqueeItem>
+        ))}
+      </MarqueeContent>
+    </Marquee>
+  </div>
+</div>
 
         </div>
       </main>

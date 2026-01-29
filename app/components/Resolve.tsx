@@ -76,15 +76,7 @@ export function ProblemSection() {
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
               Respondemos a una urgencia clara: profesionalizar la operación y construir una cadena de valor moderna que permita crecer localmente y expandirse internacionalmente.
             </p>
-            <div className="flex flex-wrap gap-4">
-               <button className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-slate-800 hover:ring-4 hover:ring-slate-200">
-                  Ver enfoque estratégico
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-               </button>
-               <button className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors">
-                  Descargar resumen
-               </button>
-            </div>
+            
           </div>
         </div>
 

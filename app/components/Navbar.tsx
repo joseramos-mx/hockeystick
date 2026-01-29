@@ -70,9 +70,9 @@ export function Navbar() {
     }
   }, [mobileOpen])
 
-  // Si pasas a desktop mientras está abierto, ciérralo (evita “X en PC”)
+  // Si pasas a desktop mientras está abierto, ciérralo
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)") // md
+    const mq = window.matchMedia("(min-width: 768px)")
     const onChange = () => {
       if (mq.matches) setMobileOpen(false)
     }
@@ -91,190 +91,186 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="border-b border-white/10 bg-black p-3 backdrop-blur-lg">
-        <div className="mx-auto h-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* 3 columnas: izquierda logo | centro links | derecha cta+menu */}
-          <div className="relative flex h-16 items-center">
-            {/* Left: Logo */}
+      {/* CAMBIO: Quitamos p-3, reducimos a h-14, aumentamos transparencia */}
+      <nav className="border-b border-white/10 bg-black/85 backdrop-blur-md w-full">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          
+          {/* Left: Logo */}
+          <div className="flex shrink-0 items-center">
             <Link href="/" className="flex items-center">
               <img
-                className="h-8 w-auto object-contain invert brightness-0"
+                className="h-7 w-auto object-contain invert brightness-0" // Logo un poco más pequeño (h-7)
                 src="/hsmx.png"
                 alt="HSMX"
               />
             </Link>
+          </div>
 
-            {/* Center: Desktop links */}
-            <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-8">
-              <Link
-                href={nav[0].href}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-              >
-                {nav[0].label}
-              </Link>
+          {/* Center: Desktop links */}
+          {/* Usamos absolute center trick */}
+          <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-6">
+            <Link
+              href={nav[0].href}
+              className="text-xs font-medium uppercase tracking-wide text-white/80 hover:text-white transition-colors"
+            >
+              {nav[0].label}
+            </Link>
 
-              <Link
-                href={nav[1].href}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-              >
-                {nav[1].label}
-              </Link>
+            <Link
+              href={nav[1].href}
+              className="text-xs font-medium uppercase tracking-wide text-white/80 hover:text-white transition-colors"
+            >
+              {nav[1].label}
+            </Link>
 
-              {/* Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={onDropEnter}
-                onMouseLeave={onDropLeave}
-              >
-                <button
-                  type="button"
-                  onClick={() => setDropOpen((v) => !v)}
-                  onFocus={onDropEnter}
-                  onBlur={onDropLeave}
-                  aria-haspopup="menu"
-                  aria-expanded={dropOpen}
-                  className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-white transition-colors"
-                >
-                  Líneas de Negocio
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${dropOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-
-                <div
-                  className={[
-                    "absolute left-1/2 mt-3 w-64 -translate-x-1/2 rounded-xl",
-                    "bg-[#141416] p-2 shadow-2xl ring-1 ring-white/10",
-                    "transition-all duration-150 origin-top",
-                    dropOpen
-                      ? "opacity-100 scale-100 translate-y-0"
-                      : "opacity-0 scale-95 -translate-y-2 pointer-events-none",
-                  ].join(" ")}
-                  role="menu"
-                >
-                  {businessLines.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={`/divisiones/${item.slug}`}
-                      role="menuitem"
-                      className="block rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-colors"
-                      onClick={() => setDropOpen(false)}
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href={nav[2].href}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-              >
-                {nav[2].label}
-              </Link>
-            </div>
-
-            {/* Right: CTA + Mobile Menu button */}
-            <div className="ml-auto flex items-center gap-3">
-              <Link
-                href="/contacto"
-                className="hidden sm:inline-flex items-center justify-center rounded-full bg-emerald-400/70 px-4 py-2 text-sm font-bold text-white hover:bg-gray-100 transition"
-              >
-                <Send className="h-4 w-4 mr-1"/> Whatsapp
-              </Link>
-
+            {/* Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={onDropEnter}
+              onMouseLeave={onDropLeave}
+            >
               <button
                 type="button"
-                className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-white/80 hover:text-white hover:bg-white/10 transition"
-                aria-label="Abrir menú"
-                onClick={() => setMobileOpen(true)}
+                onClick={() => setDropOpen((v) => !v)}
+                onFocus={onDropEnter}
+                onBlur={onDropLeave}
+                aria-haspopup="menu"
+                aria-expanded={dropOpen}
+                className="flex items-center gap-1 text-xs font-medium uppercase tracking-wide text-white/80 hover:text-white transition-colors py-4"
               >
-                <Menu className="h-6 w-6" />
+                Líneas de Negocio
+                <ChevronDown
+                  className={`h-3 w-3 transition-transform ${dropOpen ? "rotate-180" : ""}`}
+                />
               </button>
+
+              <div
+                className={[
+                  "absolute left-1/2 mt-0 w-56 -translate-x-1/2 rounded-b-xl rounded-t-lg", // Ajuste de bordes
+                  "bg-[#09090b] border border-white/10 p-1 shadow-xl",
+                  "transition-all duration-200 origin-top",
+                  dropOpen
+                    ? "opacity-100 scale-100 translate-y-0"
+                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none",
+                ].join(" ")}
+                role="menu"
+              >
+                {businessLines.map((item) => (
+                  <Link
+                    key={item.slug}
+                    href={`/divisiones/${item.slug}`}
+                    role="menuitem"
+                    className="block rounded-md px-3 py-2 text-xs font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+                    onClick={() => setDropOpen(false)}
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+              </div>
             </div>
+
+            <Link
+              href={nav[2].href}
+              className="text-xs font-medium uppercase tracking-wide text-white/80 hover:text-white transition-colors"
+            >
+              {nav[2].label}
+            </Link>
           </div>
+
+          {/* Right: CTA + Mobile Menu button */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/contacto"
+              className="hidden sm:inline-flex items-center justify-center rounded-full bg-white px-4 py-1.5 text-xs font-bold text-black hover:bg-gray-200 transition"
+            >
+              <Send className="h-3 w-3 mr-1.5"/> Whatsapp
+            </Link>
+
+            <button
+              type="button"
+              className="md:hidden inline-flex items-center justify-center rounded-md p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition"
+              aria-label="Abrir menú"
+              onClick={() => setMobileOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
+
         </div>
       </nav>
 
-      {/* Mobile drawer (solo móvil) */}
+      {/* Mobile drawer (Mantenemos igual pero ajustamos el padding superior) */}
       {mobileOpen && (
         <div className="md:hidden" role="dialog" aria-modal="true">
-          {/* Backdrop */}
           <div
-            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
 
-          {/* Panel */}
-          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-[#09090b] ring-1 ring-white/10">
-            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 pt-[calc(env(safe-area-inset-top)+16px)]">
-              <Link href="/" className="flex items-center">
-                <img
-                  className="h-7 w-auto max-w-[180px] object-contain invert brightness-0"
-                  src="/hsmx.png"
-                  alt="HSMX"
-                />
-              </Link>
-
+          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-[300px] bg-[#09090b] border-l border-white/10 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-3 h-14">
+              <span className="text-sm font-bold text-white tracking-widest uppercase">Menú</span>
               <button
                 ref={closeBtnRef}
                 type="button"
-                className="rounded-md p-2 text-white/70 hover:text-white hover:bg-white/10 transition"
+                className="rounded-md p-1 text-white/70 hover:text-white hover:bg-white/10 transition"
                 aria-label="Cerrar menú"
                 onClick={() => setMobileOpen(false)}
               >
-                <X className="h-6 w-6" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="px-6 py-6">
+            <div className="px-5 py-6 overflow-y-auto max-h-[calc(100vh-3.5rem)]">
               <div className="space-y-1">
                 {nav.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block rounded-lg px-3 py-3 text-base font-semibold text-white/90 hover:bg-white/10 hover:text-white transition"
+                    className="block rounded-lg px-3 py-2.5 text-sm font-medium text-white/90 hover:bg-white/5 hover:text-white transition"
                     onClick={() => setMobileOpen(false)}
                   >
                     {item.label}
                   </Link>
                 ))}
 
-                <button
-                  type="button"
-                  className="w-full flex items-center justify-between rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-white/10 transition"
-                  onClick={() => setMobileLinesOpen((v) => !v)}
-                  aria-expanded={mobileLinesOpen}
-                >
-                  Líneas de Negocio
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform ${mobileLinesOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    className="w-full flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-white hover:bg-white/5 transition"
+                    onClick={() => setMobileLinesOpen((v) => !v)}
+                    aria-expanded={mobileLinesOpen}
+                  >
+                    Líneas de Negocio
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${mobileLinesOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
 
-                {mobileLinesOpen && (
-                  <div className="mt-1 space-y-1 rounded-lg border border-white/10 bg-white/5 p-2">
-                    {businessLines.map((item) => (
-                      <Link
-                        key={item.slug}
-                        href={`/divisiones/${item.slug}`}
-                        className="block rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {item.title}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                  {mobileLinesOpen && (
+                    <div className="mt-1 ml-2 space-y-0.5 border-l-2 border-white/10 pl-3">
+                      {businessLines.map((item) => (
+                        <Link
+                          key={item.slug}
+                          href={`/divisiones/${item.slug}`}
+                          className="block rounded-md px-3 py-2 text-xs font-medium text-white/60 hover:text-white transition"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {item.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-8 pt-6 border-t border-white/10">
                 <Link
                   href="/contacto"
-                  className="flex items-center justify-between rounded-xl bg-emerald-600 px-4 py-3 text-base font-bold text-white hover:bg-gray-100 transition"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-emerald-500 transition"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <Send/>Whatsapp <ArrowRight className="h-5 w-5" />
+                  <Send className="h-4 w-4"/> Contactar por Whatsapp
                 </Link>
               </div>
             </div>
