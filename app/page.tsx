@@ -19,6 +19,24 @@ export default function Home() {
       <Testimonials 
         data={[
           {
+            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW. ",
+            author: "Jorge Carballar",
+            role: "Dinamita Post",
+            image: "people/persona3.jpeg"
+          },
+          {
+            quote: "Muy agradecido. Una experiencia diferente un cambio de ideas, de paradigmas. Un proceso de crecimiento de los colaboradores y del negocio. Una inyección necesaria de energías.",
+            author: "Dr. Felipe de Jesús Ramos",
+            role: "Fundador de Central Médica Santa Ana y RG Servicios Médicos Integrales",
+            image: "people/ramos.jpg"
+          },
+          {
+            quote: "Este programa fue una verdadera revelación, destacando el valor de los valores como la responsabilidad, el respeto y la justicia en el entorno laboral. Aprendí a ser autosuficiente y, al mismo tiempo, a abrirme emocionalmente para trabajar en equipo, ya que las emociones son igual de importantes que los numeros en los negocios. Estos valores, junto con las habilidades adquiridas, me han preparado para liderar con empatía y eficiencia, aspectos cruciales para el éxito en cualquier colaboración.",
+            author: "Ing. José Ramos",
+            role: "Fundador y CEO de RMS Innovation",
+            image: "people/joseramos.jpg"
+          },
+          {
             quote: "Hockeystick ha sido un verdadero impulsor para el Clan del Diente. Su asesoría sobre empresas ha sido invaluable, ayudándonos a trazar un camino claro hacia el éxito. Gracias a su experiencia y apoyo, hemos podido superar obstáculos y alcanzar nuestros objetivos de crecimiento de manera sorprendente. Su compromiso y dedicación son realmente impresionantes, y estamos agradecidos por tenerlos como socios en nuestro viaje empresarial.",
             author: "Jorge Arguello González",
             role: "Fundador del Clan del Diente y conferencista internacional",
@@ -30,30 +48,7 @@ export default function Home() {
             role: "Dueño fundador del laboratorio Dental Flores",
             image: "people/jorgeflores.jpeg" 
           },
-          {
-            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW. ",
-            author: "Marco Aurelio",
-            role: "Fundador de Acadee",
-            image: "people/persona3.jpeg"
-          },
-          {
-            quote: "Este programa fue una verdadera revelación, destacando el valor de los valores como la responsabilidad, el respeto y la justicia en el entorno laboral. Aprendí a ser autosuficiente y, al mismo tiempo, a abrirme emocionalmente para trabajar en equipo, ya que las emociones son igual de importantes que los numeros en los negocios. Estos valores, junto con las habilidades adquiridas, me han preparado para liderar con empatía y eficiencia, aspectos cruciales para el éxito en cualquier colaboración.",
-            author: "Ing. José Ramos",
-            role: "Fundador y CEO de RMS Innovation",
-            image: "people/joseramos.jpg"
-          },
-          {
-            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW. ",
-            author: "Marco Aurelio",
-            role: "Fundador de Acadee",
-            image: "people/persona3.jpeg"
-          },
-          {
-            quote: "Muy agradecido. Una experiencia diferente un cambio de ideas, de paradigmas. Un proceso de crecimiento de los colaboradores y del negocio. Una inyección necesaria de energías.",
-            author: "Dr. Felipe de Jesús Ramos",
-            role: "Fundador de Central Médica Santa Ana y RG Servicios Médicos Integrales",
-            image: "people/ramos.jpg"
-          }
+
         ]} 
       />
 
@@ -63,14 +58,29 @@ export default function Home() {
           title="Empresas que impulsamos"
           subtitle="Colaboramos con organizaciones líderes para transformar sus sectores."
           logos={[
-            { name: "Empresa 1", src: "/clientes/merril lynch.jpg" },
-            { name: "Empresa 2", src: "/clientes/baker.jpeg" },
-            { name: "Empresa 3", src: "/clientes/dentalflores.jpeg" },
-            { name: "Empresa 4", src: "/clientes/vital.jpeg" },
-            { name: "Empresa 5", src: "/clientes/rms.svg" },
-            { name: "Empresa 6", src: "/clientes/rmszahn.svg" },
-            { name: "Empresa 7", src: "/clientes/netflix.webp" },
-            { name: "Empresa 8", src: "/clientes/cmsa.webp" },
+            { name: "merril", src: "/clientes/merril lynch.jpg" },
+            { name: "baker", src: "/clientes/baker.jpeg" },
+            { name: "dental flores", src: "/clientes/dentalflores.jpeg" },
+            { name: "rms", src: "/clientes/rms.svg" },
+            { name: "rms zahn", src: "/clientes/rmszahn.svg" },
+            { name: "Netflix", src: "/clientes/netflix.webp" },
+            { name: "cmsa", src: "/clientes/cmsa.webp" },
+            { name: "italika", src: "/clientes/italika.svg" },
+            { name: "salinas", src: "/clientes/salinas.png" },
+            { name: "dinamita", src: "/clientes/dinamita.png" },
+            { name: "amazon", src: "/clientes/amazon.png" },
+            { name: "prime", src: "/clientes/prime.png" },
+            { name: "hbo", src: "/clientes/hbo.svg" },
+            { name: "disney", src: "/clientes/disneyplus.svg" },
+            { name: "alta tecnica dental", src: "/clientes/altatecnica dental.png" },
+            { name: "woof", src: "/clientes/woof.svg" },
+            { name: "impulsa", src: "/clientes/impulsa.jpeg" },
+            { name: "IAN", src: "/clientes/ian.jpeg" },
+            { name: "seko", src: "/clientes/seko.png" },
+            { name: "biomaussan", src: "/clientes/biomaussan.png" },
+
+
+
           ]}
         />
       </section>
