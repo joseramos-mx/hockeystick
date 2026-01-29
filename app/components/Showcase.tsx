@@ -53,7 +53,7 @@ export function BusinessShowcase() {
         title: "Empresas Unicornio",
         description:
           "Modelos de escalamiento masivo para competir en ecosistemas exponenciales, usando metodologías de Wharton y construcción de Organizaciones Exponenciales (ExO). ",
-        image: "/upscalemedia-transformed.png",
+        image: "/unicornio2.png",
         meta: "Escalamiento • ExO",
         icon: Zap, 
       },
