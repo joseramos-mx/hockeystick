@@ -181,7 +181,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="/contacto"
-              className="hidden sm:inline-flex items-center justify-center rounded-full bg-white px-4 py-1.5 text-xs font-bold text-black hover:bg-gray-200 transition"
+              className="hidden sm:inline-flex items-center justify-center rounded-full bg-green-400 px-4 py-1.5 text-xs font-bold text-black hover:bg-gray-200 transition"
             >
               <Send className="h-3 w-3 mr-1.5"/> Whatsapp
             </Link>
