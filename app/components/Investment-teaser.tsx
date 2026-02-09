@@ -13,70 +13,50 @@ type InvestmentTeaserCardProps = {
 
 export function InvestmentTeaserCard({
   title = "¡Haz tu investment teaser!",
-  description = "Un teaser claro y visual para presentar tu proyecto a inversionistas: narrativa, estructura y diseño profesional listo para compartir.",
-  imageSrc = "/investment.png",
+  description = "Un teaser claro y visual para presentar tu proyecto a inversionistas.",
+  imageSrc = "/investment.png", // Asegúrate de tener esta imagen o cámbiala
   href = "#",
   compact = true,
 }: InvestmentTeaserCardProps) {
   return (
     <a
       href={href}
-      className={[
-        "group relative block overflow-hidden rounded-[1.5rem] border border-black/10 bg-black/2 backdrop-blur-xl shadow-2xl hover:border-white/20 transition",
-        compact ? "w-[92vw] max-w-[520px]" : "w-[92vw] max-w-[980px]",
-      ].join(" ")}
+      className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a] shadow-2xl hover:border-white/20 transition-all duration-300 w-[240px] sm:w-[280px]"
       aria-label={title}
     >
-      <div className="flex items-stretch">
-        {/* Left image */}
-        <div
-          className={[
-            "relative shrink-0",
-            compact ? "w-[96px] sm:w-[120px]" : "w-[140px] sm:w-[180px] md:w-[220px]",
-          ].join(" ")}
-        >
-          <img
-            src={imageSrc}
-            alt=""
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
-        </div>
+      {/* 1. Imagen Arriba (Top) */}
+      <div className="relative h-32 w-full overflow-hidden">
+        <img
+          src={imageSrc}
+          alt=""
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        {/* Overlay sutil para que el texto resalte si la imagen es clara */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent opacity-80" />
+      </div>
 
-        {/* Right content */}
-        <div className={["flex-1 min-w-0", compact ? "bg-black/[0.2]" : "bg-black/10"].join(" ")}>
-          <div className={["flex items-center gap-3", compact ? "p-3 sm:p-4" : "p-5 sm:p-7"].join(" ")}>
-            {/* Text */}
-            <div className="min-w-0 pr-1">
-              <h3 className={compact ? "text-base sm:text-lg font-semibold" : "text-xl sm:text-2xl md:text-3xl font-semibold"}>
-                {title}
-              </h3>
-
-              <p
-                className={[
-                  "mt-1 text-white/80 leading-relaxed",
-                  compact ? "text-xs sm:text-sm line-clamp-2" : "text-sm sm:text-base md:text-lg line-clamp-3",
-                ].join(" ")}
-              >
-                {description}
-              </p>
-            </div>
-
-            {/* Arrow */}
-            <div className="ml-auto flex items-center justify-center">
-              <div className={["rounded-full transition", compact ? "p-2 group-hover:bg-white/5" : "p-3 sm:p-4 group-hover:bg-white/5"].join(" ")}>
-                <ArrowRight className={compact ? "h-6 w-6 sm:h-7 sm:w-7 text-white/90" : "h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white/90"} />
-              </div>
-            </div>
+      {/* 2. Contenido Abajo (Bottom) */}
+      <div className="relative p-4 pt-2">
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h3 className="text-sm font-bold text-white leading-tight mb-1">
+              {title}
+            </h3>
+            <p className="text-xs text-slate-300 leading-snug line-clamp-3">
+              {description}
+            </p>
+          </div>
+          
+          {/* Flecha */}
+          <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/90 group-hover:bg-emerald-500 transition-colors">
+            <ArrowRight className="h-3 w-3 text-white" />
           </div>
         </div>
       </div>
 
-      {/* hover glow */}
-      <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-        <div className="absolute -inset-20 bg-[radial-gradient(closest-side,rgba(255,255,255,0.10),transparent_65%)]" />
-      </div>
+      {/* Hover Glow Effect */}
+      <div className="pointer-events-none absolute -inset-px rounded-2xl border border-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
     </a>
   )
 }

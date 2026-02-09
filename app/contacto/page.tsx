@@ -1,18 +1,21 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
-import { Send, MapPin, Mail, CheckCircle2, AlertTriangle } from "lucide-react"
+import { MapPin, Mail, CheckCircle2, AlertTriangle, Send } from "lucide-react"
 import { Navbar } from "../components/Navbar"
 import { Footer } from "../components/Footer"
+// 1. IMPORTAR HOOK
+import { useLanguage } from "../context/Languagecontext"
 
 export default function ContactPage() {
+  // 2. USAR HOOK
+  const { t } = useLanguage()
+  
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    // TODO: conecta aquí tu endpoint (API Route / Server Action / Formspree)
-    // Por ahora solo simula envío exitoso:
+    // TODO: conecta aquí tu endpoint
     setStatus("success")
     setTimeout(() => setStatus("idle"), 3500)
   }
@@ -20,22 +23,20 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Background glows */}
-
-
+      
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <Navbar/>
+        
         {/* Header */}
         <div className="pt-28 pb-10">
-
-
           <h1 className="mt-6 text-4xl sm:text-5xl font-bold tracking-tight">
-            Hablemos de tu{" "}
+            {t.contact.titlePart1}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
-              siguiente nivel
+              {t.contact.titlePart2}
             </span>
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/60">
-            Déjanos tus datos y un mensaje breve. Respondemos lo antes posible.
+            {t.contact.description}
           </p>
         </div>
 
@@ -44,9 +45,9 @@ export default function ContactPage() {
           {/* Left: Info */}
           <div className="space-y-8">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-              <h2 className="text-xl font-semibold">Información</h2>
+              <h2 className="text-xl font-semibold">{t.contact.infoTitle}</h2>
               <p className="mt-3 text-white/60">
-                Para cotizaciones, alianzas o dudas generales.
+                {t.contact.infoDesc}
               </p>
 
               <div className="mt-8 flex flex-col gap-4">
@@ -60,20 +61,20 @@ export default function ContactPage() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 border border-white/10">
                     <MapPin className="h-4 w-4" />
                   </div>
-                  <span>CDMX, México</span>
+                  <span>{t.contact.location}</span>
                 </div>
               </div>
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-black/20 p-8">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-white/70">
-                Tiempos de respuesta
+                {t.contact.responseTitle}
               </h3>
               <p className="mt-3 text-white/60">
-                Usualmente respondemos en <span className="text-white/80 font-semibold">24–48 hrs</span>.
+                {t.contact.responseDesc} <span className="text-white/80 font-semibold">{t.contact.responseHours}</span>.
               </p>
               <p className="mt-2 text-white/40 text-sm">
-                Si es urgente, manda un mensaje breve con “URGENTE” al inicio.
+                {t.contact.urgentNote}
               </p>
             </div>
           </div>
@@ -82,9 +83,9 @@ export default function ContactPage() {
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold">Envíanos un mensaje</h2>
+                <h2 className="text-xl font-semibold">{t.contact.formTitle}</h2>
                 <p className="mt-2 text-white/60 text-sm">
-                  Solo lo esencial. Nosotros te guiamos.
+                  {t.contact.formDesc}
                 </p>
               </div>
 
@@ -100,11 +101,11 @@ export default function ContactPage() {
                 >
                   {status === "success" ? (
                     <>
-                      <CheckCircle2 className="h-4 w-4" /> Enviado
+                      <CheckCircle2 className="h-4 w-4" /> {t.contact.status.success}
                     </>
                   ) : (
                     <>
-                      <AlertTriangle className="h-4 w-4" /> Error
+                      <AlertTriangle className="h-4 w-4" /> {t.contact.status.error}
                     </>
                   )}
                 </div>
@@ -118,14 +119,14 @@ export default function ContactPage() {
                     htmlFor="name"
                     className="text-xs font-medium uppercase tracking-wider text-white/50"
                   >
-                    Nombre
+                    {t.contact.labels.name}
                   </label>
                   <input
                     required
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="Tu nombre"
+                    placeholder={t.contact.labels.namePh}
                     className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
                   />
                 </div>
@@ -135,14 +136,14 @@ export default function ContactPage() {
                     htmlFor="email"
                     className="text-xs font-medium uppercase tracking-wider text-white/50"
                   >
-                    Email
+                    {t.contact.labels.email}
                   </label>
                   <input
                     required
                     type="email"
                     id="email"
                     name="email"
-                    placeholder="tucorreo@empresa.com"
+                    placeholder={t.contact.labels.emailPh}
                     className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
                   />
                 </div>
@@ -153,13 +154,13 @@ export default function ContactPage() {
                   htmlFor="company"
                   className="text-xs font-medium uppercase tracking-wider text-white/50"
                 >
-                  Empresa (opcional)
+                  {t.contact.labels.company}
                 </label>
                 <input
                   type="text"
                   id="company"
                   name="company"
-                  placeholder="Nombre de tu empresa"
+                  placeholder={t.contact.labels.companyPh}
                   className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
                 />
               </div>
@@ -169,14 +170,14 @@ export default function ContactPage() {
                   htmlFor="message"
                   className="text-xs font-medium uppercase tracking-wider text-white/50"
                 >
-                  Mensaje
+                  {t.contact.labels.message}
                 </label>
                 <textarea
                   required
                   id="message"
                   name="message"
                   rows={4}
-                  placeholder="Cuéntanos brevemente sobre tu proyecto..."
+                  placeholder={t.contact.labels.messagePh}
                   className="w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-blue-500 focus:bg-black/40 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-all"
                 />
               </div>
@@ -185,12 +186,12 @@ export default function ContactPage() {
                 type="submit"
                 className="group w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black px-6 py-3.5 text-sm font-bold hover:bg-gray-200 transition-all active:scale-[0.98]"
               >
-                Enviar Mensaje
+                {t.contact.btnSend}
                 <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
 
               <p className="text-xs text-white/40">
-                Al enviar aceptas que te contactemos por email. No hacemos spam.
+                {t.contact.privacyNote}
               </p>
               
             </form>
@@ -198,6 +199,7 @@ export default function ContactPage() {
         </section>
         
       </div>
+      <Footer />
     </main>
   )
 }

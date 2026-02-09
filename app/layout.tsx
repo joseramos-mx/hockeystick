@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { WhatsAppFloat } from "./components/whatsappfloat";
+import { LanguageProvider } from "./context/Languagecontext";
 
 // 1. Configuración de Fuente (Plus Jakarta Sans para vibra Tech/Startup)
 const mainFont = Plus_Jakarta_Sans({
@@ -137,7 +139,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body className={`${mainFont.variable} font-sans antialiased bg-white text-slate-900`}>
-        
+      <LanguageProvider>
         {/* Inyectamos JSON-LD para Google */}
         <Script
           id="json-ld"
@@ -146,6 +148,8 @@ export default function RootLayout({
         />
         
         {children}
+        <WhatsAppFloat />
+        </LanguageProvider>
       </body>
     </html>
   );

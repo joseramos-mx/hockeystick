@@ -1,8 +1,10 @@
 "use client"
 
-import React, { useMemo, useState } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 import { ArrowRight, Layers, Layout, Zap, Users, Lightbulb, TrendingUp, MonitorPlay, Star } from "lucide-react"
 import Link from "next/link"
+// 1. IMPORTAR HOOK
+import { useLanguage } from "../context/Languagecontext"
 
 type BusinessLine = {
   id: string
@@ -15,93 +17,91 @@ type BusinessLine = {
 }
 
 export function BusinessShowcase() {
+  // 2. USAR HOOK
+  const { t } = useLanguage()
+
+  // 3. DEFINIR ITEMS CON TRADUCCIONES
   const items: BusinessLine[] = useMemo(
     () => [
       {
         id: "hockeystick-mx",
-        label: "GENERAL",
-        title: "HockeyStick MX",
-        description:
-          "Socio estratégico para incrementar la competitividad de MyPymes y Startups mediante detección de oportunidades.",
+        label: t.businessShowcase.items.hockey.label,
+        title: t.businessShowcase.items.hockey.title,
+        description: t.businessShowcase.items.hockey.desc,
         image: "lineas/compass real.png",
-        meta: "Estrategia • Consultoría",
+        meta: t.businessShowcase.items.hockey.meta,
         icon: Layout, 
       },
       {
         id: "aceleradora-exponencial",
-        label: "ACELERACIÓN",
-        title: "Aceleradora Exponencial",
-        description:
-          "Diseño de modelos de negocio ágiles (Lean Startup, Growth Hacking) para exponencializar procesos y ventas.",
+        label: t.businessShowcase.items.accelerator.label,
+        title: t.businessShowcase.items.accelerator.title,
+        description: t.businessShowcase.items.accelerator.desc,
         image: "lineas/cohete.png", 
-        meta: "Scale-up • Agilidad",
+        meta: t.businessShowcase.items.accelerator.meta,
         icon: TrendingUp, 
       },
       {
         id: "incubadora-exponencial",
-        label: "INCUBACIÓN",
-        title: "Incubadora Exponencial",
-        description:
-          "Transformamos ideas en negocios rentables. Desarrollo de Prototipo, MVP y lanzamiento con método GROW.",
+        label: t.businessShowcase.items.incubator.label,
+        title: t.businessShowcase.items.incubator.title,
+        description: t.businessShowcase.items.incubator.desc,
         image: "lineas/ajedrez.png",
-        meta: "Startups • MVP",
+        meta: t.businessShowcase.items.incubator.meta,
         icon: Lightbulb, 
       },
       {
         id: "empresas-unicornio",
-        label: "UNICORNIOS",
-        title: "Empresas Unicornio",
-        description:
-          "Modelos de escalamiento masivo para competir en ecosistemas exponenciales y construcción de ExO.",
+        label: t.businessShowcase.items.unicorns.label,
+        title: t.businessShowcase.items.unicorns.title,
+        description: t.businessShowcase.items.unicorns.desc,
         image: "/unicornio2.png",
-        meta: "Escalamiento • ExO",
+        meta: t.businessShowcase.items.unicorns.meta,
         icon: Zap, 
       },
       {
         id: "fondos-y-ma",
-        label: "FONDOS & M&A",
-        title: "Fondos de Inversión",
-        description:
-          "Estructuración financiera para levantar capital (Angel/VC), fusiones y adquisiciones.",
+        label: t.businessShowcase.items.funds.label,
+        title: t.businessShowcase.items.funds.title,
+        description: t.businessShowcase.items.funds.desc,
         image: "lineas/toro.png",
-        meta: "Capital • Finanzas",
+        meta: t.businessShowcase.items.funds.meta,
         icon: Layers, 
       },
       {
         id: "universidad-hockeystick",
-        label: "EDUCACIÓN",
-        title: "Universidad HockeyStick",
-        description:
-          "Formación disruptiva para el ecosistema emprendedor. Labs y Workshops para desarrollar habilidades reales.",
+        label: t.businessShowcase.items.university.label,
+        title: t.businessShowcase.items.university.title,
+        description: t.businessShowcase.items.university.desc,
         image: "lineas/cerebro.png",
-        meta: "Formación • Workshops",
+        meta: t.businessShowcase.items.university.meta,
         icon: Users, 
       },
       {
         id: "mkt-digital-hub",
-        label: "DIGITAL HUB",
-        title: "MKT Digital & Hub",
-        description:
-          "Transformación digital 4.0/5.0, automatización de procesos y marketing exponencial.",
+        label: t.businessShowcase.items.hub.label,
+        title: t.businessShowcase.items.hub.title,
+        description: t.businessShowcase.items.hub.desc,
         image: "lineas/math.png",
-        meta: "Tech 4.0 • Automatización",
+        meta: t.businessShowcase.items.hub.meta,
         icon: MonitorPlay, 
       },
       {
         id: "PMO-PMP-agile",
-        label: "PMO & AGILE",
-        title: "Agile Office",
-        description:
-          "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
+        label: t.businessShowcase.items.pmo.label,
+        title: t.businessShowcase.items.pmo.title,
+        description: t.businessShowcase.items.pmo.desc,
         image: "lineas/compass.png",
-        meta: "Gestión • Ejecución",
+        meta: t.businessShowcase.items.pmo.meta,
         icon: Star, 
       },
     ],
-    []
+    [t] // Dependencia importante: recalcula cuando cambia 't'
   )
 
   const [activeId, setActiveId] = useState(items[0]!.id)
+  
+  // Buscar el item activo actual
   const active = items.find((x) => x.id === activeId) ?? items[0]!
 
   return (
@@ -110,22 +110,18 @@ export function BusinessShowcase() {
         
         {/* Section Header */}
         <div className="mb-12 max-w-3xl">
-           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500 mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500 mb-6">
               <Layers className="h-3.5 w-3.5 text-blue-600" />
-              Ecosistema Integral
+              {t.businessShowcase.badge}
             </div>
            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-slate-900 tracking-tight mb-4 leading-[1.1]">
-             Nuestras Líneas de Negocio
+             {t.businessShowcase.title}
            </h2>
            <p className="text-lg text-slate-500 font-light leading-relaxed">
-             Un ecosistema de soluciones interconectadas, diseñadas para acompañar cada etapa del ciclo de vida de tu empresa.
+             {t.businessShowcase.description}
            </p>
         </div>
 
-        {/* CAMBIO CLAVE DE UI/UX: 
-            items-start (en lugar de stretch) permite que la tarjeta izquierda 
-            tenga solo la altura necesaria, eliminando el espacio blanco al fondo.
-        */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_450px] gap-8 items-start">
           
           {/* LEFT: MAIN PREVIEW PANEL */}
@@ -140,7 +136,7 @@ export function BusinessShowcase() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
             </div>
             
-            {/* Content Content - Padding ajustado para ser más compacto */}
+            {/* Content Content */}
             <div className="p-8 flex flex-col relative">
               
               <div>
@@ -150,11 +146,12 @@ export function BusinessShowcase() {
                 </div>
 
                 <div className="overflow-hidden min-h-[140px]">
-                  <h3 key={active.title + "title"} className="text-2xl sm:text-3xl font-medium text-slate-900 mb-3 animate-in slide-in-from-bottom-2 duration-300 fade-in">
+                  {/* Usamos keys únicas basadas en titulo + idioma para reiniciar animaciones */}
+                  <h3 key={active.title} className="text-2xl sm:text-3xl font-medium text-slate-900 mb-3 animate-in slide-in-from-bottom-2 duration-300 fade-in">
                     {active.title}
                   </h3>
                   
-                  <p key={active.title + "desc"} className="text-base sm:text-lg text-slate-500 font-light leading-relaxed animate-in slide-in-from-bottom-3 duration-500 fade-in fill-mode-backwards delay-75">
+                  <p key={active.description} className="text-base sm:text-lg text-slate-500 font-light leading-relaxed animate-in slide-in-from-bottom-3 duration-500 fade-in fill-mode-backwards delay-75">
                     {active.description}
                   </p>
                 </div>
@@ -164,11 +161,11 @@ export function BusinessShowcase() {
               <div className="flex flex-wrap gap-3 animate-in fade-in duration-700 delay-150 mt-6">
                 <Link href={`/divisiones/${active.id}`}>
                     <button className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:scale-105 active:scale-95">
-                      Explorar división <ArrowRight className="h-4 w-4" />
+                      {t.businessShowcase.btnExplore} <ArrowRight className="h-4 w-4" />
                     </button>
                 </Link>
                 <button className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors">
-                  Agendar llamada
+                  {t.businessShowcase.btnSchedule}
                 </button>
               </div>
               
@@ -176,10 +173,9 @@ export function BusinessShowcase() {
           </div>
 
           {/* RIGHT: NAVIGATION LIST */}
-          {/* CAMBIO: Altura fija (h-[520px]) para mantener consistencia y scroll, evitando que la página salte */}
           <div className="flex flex-col h-[520px] bg-slate-50/50 rounded-[2rem] border border-slate-100 overflow-hidden sticky top-8">
             <div className="p-5 border-b border-slate-200/60 bg-white/80 backdrop-blur-sm flex items-center justify-between sticky top-0 z-10">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Selecciona una división</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{t.businessShowcase.listHeader}</span>
             </div>
             
             <div className="flex-1 overflow-y-auto p-3 space-y-2 custom-scrollbar">

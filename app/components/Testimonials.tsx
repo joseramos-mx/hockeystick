@@ -1,13 +1,32 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react"
-import { Testimonial } from "@/lib/business-data"
+// 1. IMPORTAR HOOK
+import { useLanguage } from "../context/Languagecontext"
 
-export function Testimonials({ data }: { data: Testimonial[] }) {
+// Ya no necesitamos importar Testimonial de business-data porque usamos el tipo inferido de la traducción o uno local simple.
+
+export function Testimonials() {
+  // 2. USAR HOOK
+  const { t } = useLanguage()
+  
+  // 3. OBTENER DATOS DEL DICCIONARIO
+  const data = t.testimonials.items
+
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  // Lógica del Autoplay
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(() => {
+      nextStep()
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [index, isPaused])
 
   if (!data || data.length === 0) return null
 
@@ -44,19 +63,19 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
   return (
     <section className="py-16 sm:py-24 bg-slate-50 overflow-hidden relative selection:bg-blue-100 selection:text-blue-900">
       
-      {/* Decoración de Fondo (Ajustada para móvil) */}
+      {/* Decoración de Fondo */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[300px] sm:h-[400px] bg-blue-100/40 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         
-        {/* Header Compacto */}
+        {/* Header Compacto (TRADUCIDO) */}
         <div className="flex flex-col sm:flex-row items-center sm:items-end justify-between mb-8 sm:mb-12 max-w-5xl mx-auto text-center sm:text-left">
           <div className="mb-6 sm:mb-0">
              <h2 className="text-2xl sm:text-3xl font-medium text-slate-900 tracking-tight mb-2">
-              Impacto Real
+              {t.testimonials.title}
             </h2>
             <p className="text-sm sm:text-base text-slate-500 font-light">
-              Lo que dicen quienes ya escalaron.
+              {t.testimonials.subtitle}
             </p>
           </div>
 
@@ -72,12 +91,11 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
         </div>
 
         {/* ÁREA DE ANIMACIÓN RESPONSIVE */}
-        {/* IMPORTANTE: Altura dinámica según breakpoint.
-            h-[600px] para móvil (elementos apilados ocupan más alto).
-            sm:h-[500px] para tablets.
-            md:h-[350px] para desktop (elementos lado a lado ocupan menos alto).
-        */}
-        <div className="relative h-[600px] sm:h-[500px] md:h-[380px] lg:h-[350px] w-full max-w-5xl mx-auto">
+        <div 
+          className="relative h-[600px] sm:h-[500px] md:h-[380px] lg:h-[350px] w-full max-w-5xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <AnimatePresence initial={false} custom={direction} mode="wait">
             <motion.div
               key={index}
@@ -90,12 +108,12 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
                 x: { type: "spring", stiffness: 400, damping: 40 },
                 opacity: { duration: 0.3 }
               }}
-              className="absolute inset-0 w-full px-1" // px-1 evita cortes de sombra lateral
+              className="absolute inset-0 w-full px-1"
             >
               {/* CARD PRINCIPAL */}
               <div className="w-full h-full bg-white/80 backdrop-blur-sm rounded-[2rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col md:flex-row items-center p-6 sm:p-8 md:p-10 gap-6 sm:gap-8 md:gap-12 group hover:border-blue-100 transition-colors duration-500">
                 
-                {/* 1. IMAGEN - Centrada en móvil, izquierda en desktop */}
+                {/* IMAGEN */}
                 <div className="relative shrink-0 mx-auto md:mx-0 mt-4 md:mt-0">
                     <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-64 rounded-2xl overflow-hidden shadow-sm border border-slate-100 relative z-10 group-hover:shadow-md transition-all duration-500">
                       <img 
@@ -104,17 +122,15 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    {/* Sombra decorativa */}
                     <div className="absolute top-3 -right-3 w-full h-full rounded-2xl bg-blue-50 -z-10 group-hover:bg-blue-100 transition-colors duration-500 hidden sm:block" />
                 </div>
 
-                {/* 2. CONTENIDO - Centrado en móvil */}
+                {/* CONTENIDO */}
                 <div className="flex-1 flex flex-col justify-center h-full text-center md:text-left w-full">
                   
                   {/* Cita */}
                   <div className="relative mb-4 sm:mb-6 flex-1 flex flex-col justify-center">
                     <Quote className="hidden md:block absolute -top-4 -left-6 h-8 w-8 text-blue-100 transform -scale-x-100" />
-                    {/* Texto más pequeño en móvil para evitar overflow */}
                     <blockquote className="text-base sm:text-lg md:text-xl font-light text-slate-700 leading-relaxed italic line-clamp-6 md:line-clamp-none">
                       "{data[index].quote}"
                     </blockquote>
@@ -130,9 +146,11 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
                     {/* Indicador de Posición (Puntos) */}
                     <div className="flex gap-1.5">
                       {data.map((_, idx) => (
-                        <div 
+                        <button 
                           key={idx}
-                          className={`h-1.5 rounded-full transition-all duration-300 ${idx === index ? "w-6 bg-blue-600" : "w-1.5 bg-slate-200"}`}
+                          onClick={() => setIndex(idx)} 
+                          className={`h-1.5 rounded-full transition-all duration-300 ${idx === index ? "w-6 bg-blue-600" : "w-1.5 bg-slate-200 hover:bg-blue-300"}`}
+                          aria-label={`Ir al testimonio ${idx + 1}`}
                         />
                       ))}
                     </div>
@@ -144,7 +162,7 @@ export function Testimonials({ data }: { data: Testimonial[] }) {
           </AnimatePresence>
         </div>
         
-        {/* Controles Móbiles (Debajo de la card en mobile) */}
+        {/* Controles Móbiles */}
         <div className="flex md:hidden justify-center gap-4 mt-8">
            <button onClick={prevStep} className="p-3 rounded-full bg-white shadow-sm border border-slate-100 text-slate-600 active:scale-95 transition-transform">
              <ArrowLeft className="h-5 w-5" />

@@ -1,4 +1,4 @@
-// lib/business-data.ts
+import { Layout, TrendingUp, Lightbulb, Zap, Layers, Users, MonitorPlay, Star } from "lucide-react"
 
 export type Testimonial = {
   quote: string
@@ -22,7 +22,8 @@ export type BusinessService = {
   testimonials?: Testimonial[]
 }
 
-export const servicesData: BusinessService[] = [
+// Data en Español (La que ya tenías)
+const servicesEs: BusinessService[] = [
   {
     slug: "hockeystick-mx",
     title: "HockeyStick MX",
@@ -302,6 +303,294 @@ export const servicesData: BusinessService[] = [
   }
 ];
 
-export function getServiceBySlug(slug: string) {
-  return servicesData.find((service) => service.slug === slug);
+// Data en Inglés
+const servicesEn: BusinessService[] = [
+  {
+    slug: "hockeystick-mx",
+    title: "HockeyStick MX",
+    shortDesc: "Strategic partner to increase competitiveness and value for SMEs & Startups.",
+    heroImage: "/bg.png",
+    whatIs: "A key partner for every company to develop Projects, Programs, Implants, Retainers, Workshops, Labs, or Coaching. We support the detection of opportunity areas to increase company value and institutionalize processes.",
+    whatItSolves: [
+      "Increase competitiveness of Mexican SMEs and Startups.",
+      "Apply optimized business models with modern methodologies.",
+      "Generate greater added value and strengthening with international standards.",
+      "Ability to compete in international markets.",
+      "Attraction of public and private investment."
+    ],
+    differentiators: [
+      { title: "Adaptability", desc: "Proven techniques adapted to the Mexican economy." },
+      { title: "Specialists", desc: "Invaluable capacity of expert consultants in each area." },
+      { title: "Alliances", desc: "Collaboration with the best public and private institutions." },
+      { title: "Certification", desc: "Proven knowledge in specialization schemes." }
+    ],
+    advantages: [
+      "Awareness of current status in a globalized environment.",
+      "Identification of potential company areas.",
+      "Benchmarking against transnationals.",
+      "Development of Benchmarking and Management Indicators.",
+      "Comprehensive accompaniment at every stage."
+    ],
+    howItWorks: [
+      { step: "01", title: "Incubation", desc: "Structure and Form for Startups." },
+      { step: "02", title: "Acceleration", desc: "Restructuring and New Form for Scale-ups." },
+      { step: "03", title: "Digital Hub", desc: "Sales and Utility Control with 4.0 Technology." },
+      { step: "04", title: "Angel & VC", desc: "Funds, Financing, and Expansion or Sale." }
+    ],
+    faqs: [
+      { question: "What does HockeyStick do?", answer: "We are a firm that intervenes in detecting opportunities to increase profits and market value." },
+      { question: "Is there a guarantee?", answer: "Yes, we guarantee Sales, Profits, and Dividends." }
+    ],
+    guarantee: "We guarantee Sales, Profits, and Dividends.",
+    testimonials: [
+      {
+        quote: "Thanks to HockeyStick we managed to attract the private investment we needed to expand nationwide.",
+        author: "Ricardo Mendoza",
+        role: "Founder, TechGrow MX",
+        image: "https://i.pravatar.cc/150?u=1"
+      }
+    ]
+  },
+  {
+    slug: "aceleradora-exponencial",
+    title: "Exponential Accelerator",
+    shortDesc: "Design of agile business models to scale profits and expansion.",
+    heroImage: "/bg.png",
+    whatIs: "We design ongoing business models with agile techniques to exponentialize internal processes, financial administration, and personnel optimization using methodologies such as Design Thinking and Lean Startup.",
+    whatItSolves: [
+      "Identify internal/external capabilities and potentials.",
+      "Incentivize growth and expansion opportunities.",
+      "Detect administrative and technological barriers.",
+      "Control and increase profits and sales.",
+      "Structure corporate strategic bases."
+    ],
+    differentiators: [
+      { title: "Agile Methodologies", desc: "Use of SCRUM, Lean Startup, and Growth Hacking." },
+      { title: "Experience", desc: "Over 27 years mastering supply and sales channels." },
+      { title: "Technological Alliance", desc: "Access to researchers from the City of Knowledge." }
+    ],
+    advantages: [
+      "Internationally certified specialists.",
+      "Agile and less bureaucratic processes.",
+      "Valuation of tangible and intangible assets.",
+      "Establishment of Corporate Governance.",
+      "Total preparation for massive scalability."
+    ],
+    howItWorks: [
+      { step: "01", title: "DAEE", desc: "Acceleration Diagnosis: Definition and Planning." },
+      { step: "02", title: "PIAEE", desc: "Comprehensive Business Acceleration Program." },
+      { step: "03", title: "IMPLANT", desc: "Accompaniment of a specialist within your organization." },
+      { step: "04", title: "WORKLAB", desc: "Workshops for guaranteed implementation of new processes." }
+    ],
+    faqs: [
+      { question: "Is it for SMEs?", answer: "Yes, we adapt the acceleration program to the company's maturity level." },
+      { question: "Can I participate if I'm failing?", answer: "We can perform a diagnosis to evaluate rescue viability." }
+    ],
+    guarantee: "We deliver a structured business with institutionalized processes and income control to achieve profits.",
+    testimonials: [
+      {
+        quote: "The IMPLANT program changed our operational culture. We are now much more efficient and profitable.",
+        author: "Sofía Galván",
+        role: "COO, Grupo Dental Pro",
+        image: "https://i.pravatar.cc/150?u=2"
+      }
+    ]
+  },
+  {
+    slug: "incubadora-exponencial",
+    title: "Exponential Incubator",
+    shortDesc: "From idea to profitable business: Incubation and structuring of startups.",
+    heroImage: "/bg.png",
+    whatIs: "Incubation of Startups and SMEs from idea development, prototype, and MVP to the launch of version 1.0 with partner search and launch matrix.",
+    whatItSolves: [
+      "Solves project startup from an idea.",
+      "Materializes ideas into viable investment projects.",
+      "Exponentializes projects for market needs.",
+      "Prevents early entrepreneur mortality."
+    ],
+    differentiators: [
+      { title: "GROW Method", desc: "Proprietary methodology for structured growth." },
+      { title: "Accompaniment", desc: "Constant Empowerment using Job Shop techniques." }
+    ],
+    advantages: [
+      "Certified growth tools.",
+      "Specialists focused on achieving results.",
+      "Real value proposition validated in the market."
+    ],
+    howItWorks: [
+      { step: "01", title: "Idea & Plan", desc: "Initial structuring and Canvas model." },
+      { step: "02", title: "Prototyping", desc: "MVP development and proof of concept." },
+      { step: "03", title: "Launch", desc: "Launch of profitable version 1.0." }
+    ],
+    faqs: [
+      { question: "What do I get?", answer: "A profitable, solid, and liquid business from its creation." }
+    ],
+    guarantee: "We deliver a 100% profitable, solid, and liquid ongoing business starting from an idea.",
+    testimonials: [
+      {
+        quote: "I arrived with an idea and left with a company operating and billing. The GROW method works.",
+        author: "Marco Aurelio",
+        role: "Founder, Acadee",
+        image: "https://i.pravatar.cc/150?u=3"
+      }
+    ]
+  },
+  {
+    slug: "empresas-unicornio",
+    title: "Unicorn Companies",
+    shortDesc: "Scaling models to compete in the exponential ecosystem.",
+    heroImage: "/bg.png",
+    whatIs: "Design of business models capable of competing with unicorn companies using Wharton University methodologies and Exponential Organizations (ExO) tools.",
+    whatItSolves: [
+      "Audit of business model for survival.",
+      "Detection of cognitive and technological barriers.",
+      "Resolution of common errors in massive scaling."
+    ],
+    differentiators: [
+      { title: "Wharton & Cambridge", desc: "Techniques from the best universities in the world." },
+      { title: "ExO Method", desc: "Structure for building exponential organizations." }
+    ],
+    advantages: [
+      "Transformation to international processes.",
+      "Preparation for exponential scalability.",
+      "Alignment of resources for market consolidation."
+    ],
+    howItWorks: [
+      { step: "01", title: "DSEE", desc: "Diagnosis of the Exponential Startup." },
+      { step: "02", title: "PISEE", desc: "Comprehensive Exponential Startup Program." },
+      { step: "03", title: "Scale", desc: "Guaranteed implementation of scalability." }
+    ],
+    faqs: [
+      { question: "Who can participate?", answer: "Startups with high potential seeking massive market valuations." }
+    ],
+    guarantee: "We deliver a Startup structured in clients, management, and leadership for unicorn consolidation.",
+    testimonials: [
+      {
+        quote: "Wharton's vision applied to our local market allowed us to see scaling opportunities we previously ignored.",
+        author: "Elena Vasquez",
+        role: "CEO, InnovaHealth",
+        image: "https://i.pravatar.cc/150?u=4"
+      }
+    ]
+  },
+  {
+    slug: "fondos-y-ma",
+    title: "Investment Funds & M&A",
+    shortDesc: "Financial structuring to raise capital, mergers, or acquisitions.",
+    heroImage: "/bg.png",
+    whatIs: "Structuring of business models for Angel or Venture Capital fund support. Advisory by CFA specialists for mergers, acquisitions (M&A), and Crowdfunding strategies.",
+    whatItSolves: [
+      "Connect investment projects to private capital.",
+      "Solve government and private funding issues.",
+      "Implement certifiable structures for credit approval."
+    ],
+    differentiators: [
+      { title: "CFA Specialists", desc: "Certified experts in private equity." },
+      { title: "Own Fund", desc: "Access to HockeyStick MX's own investment cluster." }
+    ],
+    advantages: [
+      "International certification of financial viability.",
+      "Financial methodologies focused 100% on growth."
+    ],
+    howItWorks: [
+      { step: "01", title: "Search", desc: "Executive search for funding by investment funds." },
+      { step: "02", title: "Strategy", desc: "Business consulting for purchase or merger (M&A)." }
+    ],
+    faqs: [
+      { question: "Do you deliver results?", answer: "We prepare the company to be financially attractive and auditable for any investor." }
+    ],
+    guarantee: "We deliver a company financially prepared to be audited, bought, or merged.",
+    testimonials: [
+      {
+        quote: "The financial transparency we achieved allowed us to close our first seed round in record time.",
+        author: "Daniel Orozco",
+        role: "CFO, Fintech Solutions",
+        image: "https://i.pravatar.cc/150?u=5"
+      }
+    ]
+  },
+  {
+    slug: "universidad-hockeystick",
+    title: "HockeyStick University",
+    shortDesc: "Disruptive training for entrepreneurs and the ecosystem.",
+    heroImage: "/bg.png",
+    whatIs: "Teaching and training space with disruptive models focused on wealth generation and better business performance.",
+    whatItSolves: [
+      "Need for playful and practical training.",
+      "Development of skills for changing environments.",
+      "Providing structured value knowledge to the ecosystem."
+    ],
+    differentiators: [
+      { title: "Playful", desc: "Fun education but with international rigor." },
+      { title: "Alliance Network", desc: "Connection with national and international universities." }
+    ],
+    advantages: [
+      "Certified specialist trainers.",
+      "Institutionalization of corporate training."
+    ],
+    howItWorks: [
+      { step: "01", title: "WorkLabs", desc: "Practical and intensive work laboratories." },
+      { step: "02", title: "Diplomas", desc: "High-level disruptive academic training." }
+    ],
+    faqs: [
+      { question: "Who can participate?", answer: "Any member of the entrepreneurial ecosystem seeking growth." }
+    ],
+    guarantee: "We guarantee the acquisition of knowledge and the implementation of all learned tools.",
+    testimonials: [
+      {
+        quote: "It's not typical classroom theory. Here you come to apply tools that you use the next day in your business.",
+        author: "Patricia Luviano",
+        role: "Entrepreneur, Textile Sector",
+        image: "https://i.pravatar.cc/150?u=6"
+      }
+    ]
+  },
+  {
+    slug: "mkt-digital-hub",
+    title: "MKT Digital & Digital Hub",
+    shortDesc: "Digital transformation 4.0, automation, and exponential marketing.",
+    heroImage: "/bg.png",
+    whatIs: "Technological hub that provides exponential marketing and 4.0/5.0 digital structure to automate financial and sales processes.",
+    whatItSolves: [
+      "Omnichannel sales in digital environments.",
+      "Optimization of current technological infrastructure.",
+      "Digital transformation for competitive survival."
+    ],
+    differentiators: [
+      { title: "Tech Specialists", desc: "Experts in digital infrastructure and automation." },
+      { title: "27+ Experience", desc: "Sales methodologies developed for nearly three decades." }
+    ],
+    advantages: [
+      "Presence in new digital markets.",
+      "Measurable increase in online sales.",
+      "Automated technological structure."
+    ],
+    howItWorks: [
+      { step: "01", title: "PIMEEDET", desc: "Comprehensive digital marketing and technology project." },
+      { step: "02", title: "SAPICVU", desc: "Semi-automation of internal processes and profits." }
+    ],
+    faqs: [
+      { question: "Is automating expensive?", answer: "It is an investment that pays for itself with efficiency and profit control." }
+    ],
+    guarantee: "We deliver an automated business in internal processes, profits, and sales.",
+    testimonials: [
+      {
+        quote: "We went from depending on physical sales to having a constant flow of qualified leads through digital channels.",
+        author: "Jorge Nava",
+        role: "Commercial Manager, RMS Zahn",
+        image: "https://i.pravatar.cc/150?u=7"
+      }
+    ]
+  }
+];
+
+// Objeto contenedor
+export const servicesData = {
+  es: servicesEs,
+  en: servicesEn
+}
+
+// Helper actualizado para pedir idioma
+export function getServiceBySlug(slug: string, lang: 'es' | 'en' = 'es') {
+  return servicesData[lang].find((service) => service.slug === slug);
 }

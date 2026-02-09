@@ -6,6 +6,8 @@ import { Navbar } from "../components/Navbar"
 import { InvestmentTeaserCard } from "./Investment-teaser"
 import BlurText from "./BlurText"
 import Link from "next/link"
+// 1. IMPORTAMOS EL HOOK DE IDIOMA
+import { useLanguage } from "../context/Languagecontext"
 
 const PARTNER_LOGOS = [
   { name: "Agile Innovation", src: "clientes/rms.svg" },
@@ -16,6 +18,9 @@ const PARTNER_LOGOS = [
 function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
   const [isVisible, setIsVisible] = useState(false)
+  
+  // 2. USAMOS EL HOOK AQUÍ TAMBIÉN PARA EL BOTÓN FLOTANTE
+  const { language } = useLanguage()
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 1000)
@@ -35,7 +40,12 @@ function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boo
             <span className="text-xs">✕</span>
           </button>
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#04080c]/80 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
-            <InvestmentTeaserCard compact />
+            {/* Nota: InvestmentTeaserCard también debería recibir props de texto si quieres traducirlo por dentro */}
+            <InvestmentTeaserCard 
+                compact 
+                title={language === 'es' ? "¡Haz tu investment teaser!" : "Create your investment teaser!"}
+                description={language === 'es' ? "Un teaser claro y visual para presentar tu proyecto." : "A clear and visual teaser to present your project."}
+            />
           </div>
         </div>
       ) : (
@@ -43,12 +53,17 @@ function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boo
           onClick={() => setIsOpen(true)}
           className="group flex items-center gap-4 rounded-full border border-white/10 bg-[#0F172A]/80 px-5 py-3 shadow-2xl backdrop-blur-md transition-all hover:scale-105 hover:border-blue-500/50"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-red-400 to-rose-600 text-white shadow-lg shadow-blue-500/20">
             <Sparkles className="h-5 w-5" />
           </div>
           <div className="text-left">
-            <p className="text-xs font-semibold tracking-wide text-white">Oportunidad de Inversión</p>
-            <p className="text-[10px] uppercase tracking-widest text-blue-400/80 font-bold">Series A Open</p>
+            {/* TEXTOS TRADUCIDOS BOTÓN FLOTANTE */}
+            <p className="text-xs font-semibold tracking-wide text-white">
+                {language === 'es' ? "Oportunidad de Inversión" : "Investment Opportunity"}
+            </p>
+            <p className="text-[10px] uppercase tracking-widest text-blue-400/80 font-bold">
+                {language === 'es' ? "Obtén el tuyo" : "Get yours"}
+            </p>
           </div>
         </button>
       )}
@@ -57,6 +72,9 @@ function DismissibleInvestmentTeaser({ defaultOpen = true }: { defaultOpen?: boo
 }
 
 export default function ModernHeroSplit() {
+  // 3. USAMOS EL HOOK EN EL COMPONENTE PRINCIPAL
+  const { language } = useLanguage()
+
   return (
     <div className="relative min-h-screen w-full bg-[#020510] text-slate-50 font-sans selection:bg-blue-500/30 overflow-x-hidden">
       
@@ -76,46 +94,55 @@ export default function ModernHeroSplit() {
                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
              </span>
-             Disponible para nuevos proyectos
+             {/* TEXTO TRADUCIDO */}
+             {language === 'es' ? "Disponible para nuevos proyectos" : "Available for new projects"}
           </div>
 
           {/* Heading */}
           <div className="mb-8 relative z-10">
+            {/* BLUR TEXT TRADUCIDO (Se reinicia la animación al cambiar la key) */}
             <BlurText
-              text="Soluciones para"
+              key={language} 
+              text={language === 'es' ? "Soluciones para" : "Solutions for"}
               delay={40}
               animateBy="words"
               direction="top"
               className="block text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-medium tracking-tight text-white leading-[1]"
             />
-            {/* Palabra resaltada en azul estilo 'caja' */}
+            {/* Palabra resaltada en azul */}
             <div className="mt-2 inline-block bg-[#0055FF] px-4 pt-1 pb-3 transform origin-left">
                  <span className="text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-bold tracking-tight text-white leading-[1]">
-                    MyPymes
+                   {language === 'es' ? "MyPymes" : "SMEs"}
                  </span>
             </div>
           </div>
 
-          {/* Subtext */}
+          {/* Subtext TRADUCIDO */}
           <p className="mb-10 max-w-md text-lg text-slate-400 leading-relaxed font-light">
-            Desbloqueamos nuevos caminos para el crecimiento mezclando datos, estrategia y tecnología para mover tu negocio hacia adelante.
+            {language === 'es' 
+              ? "Desbloqueamos nuevos caminos para el crecimiento mezclando datos, estrategia y tecnología para mover tu negocio hacia adelante."
+              : "We unlock new paths for growth by combining data, strategy, and technology to move your business forward."
+            }
           </p>
 
-          {/* Botones */}
+          {/* Botones TRADUCIDOS */}
           <div className="flex flex-wrap items-center gap-6 relative z-10 mb-16">
+             <Link href="/contacto">
              <button className="group flex items-center justify-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold text-sm transition-transform hover:scale-105 active:scale-95">
-               Empezar Ahora
+               {language === 'es' ? "Empezar Ahora" : "Start Now"}
                <ArrowRight className="h-4 w-4" />
              </button>
+             </Link>
              <Link href="#clientes" className="text-sm font-semibold text-white hover:text-blue-400 transition-colors flex items-center gap-2">
-               Ver Casos de Éxito <ChevronRight className="h-4 w-4" />
+               {language === 'es' ? "Ver Casos de Éxito" : "See Success Stories"} 
+               <ChevronRight className="h-4 w-4" />
              </Link>
           </div>
 
           {/* ================= MINI TABLA DE LOGOS (GRID) ================= */}
           <div className="border-t border-slate-800/60 pt-8 w-full max-w-lg">
             <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-6">
-              Nuestros Aliados Estratégicos
+              {language === 'es' ? "Nuestros Aliados Estratégicos" : "Our Strategic Partners"}
             </p>
             <div className="grid grid-cols-3 gap-8 items-center">
               {PARTNER_LOGOS.map((logo, index) => (
@@ -137,12 +164,11 @@ export default function ModernHeroSplit() {
            {/* Imagen de fondo */}
            <div className="absolute inset-0 bg-slate-900">
               <img
-                src="/bg.png" 
+                src="/whaunicorn.jpg" 
                 alt="Office working environment" 
-                className="h-full w-full object-cover object-center opacity-80 mix-blend-overlay lg:opacity-100 lg:mix-blend-normal transition-transform duration-1000 hover:scale-105"
+                className="h-full w-full object-cover object-center lg:opacity-100 lg:mix-blend-normal transition-transform duration-1000 hover:scale-105"
               />
               {/* Overlay sutil azul para unificar tonos */}
-              <div className="absolute inset-0 bg-blue-900/20 mix-blend-multiply"></div>
            </div>
         </div>
 

@@ -3,32 +3,38 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown, ArrowRight, Send } from "lucide-react"
+import { Menu, X, ChevronDown, Send } from "lucide-react"
+import { LanguageToggle } from "./languagetoggle" // Asegúrate de que el import sea correcto (mayúsculas/minúsculas)
+// 1. IMPORTAR EL HOOK
+import { useLanguage } from "../context/Languagecontext"
 
 type NavItem = { label: string; href: string }
 type DropItem = { title: string; slug: string }
 
-const businessLines: DropItem[] = [
-  { title: "HockeyStick MX", slug: "hockeystick-mx" },
-  { title: "Aceleradora", slug: "aceleradora-exponencial" },
-  { title: "Incubadora", slug: "incubadora-exponencial" },
-  { title: "Empresas Unicornio", slug: "empresas-unicornio" },
-  { title: "Fondos y M&A", slug: "fondos-y-ma" },
-  { title: "Universidad", slug: "universidad-hockeystick" },
-  { title: "MKT Digital & Hub", slug: "mkt-digital-hub" },
-]
-
 export function Navbar() {
   const pathname = usePathname()
+  // 2. USAR EL HOOK
+  const { t } = useLanguage()
 
+  // 3. DEFINIR DATOS DENTRO DEL COMPONENTE PARA USAR 't'
   const nav: NavItem[] = useMemo(
     () => [
-      { label: "Inicio", href: "/" },
-      { label: "Nosotros", href: "/nosotros" },
-      { label: "Contacto", href: "/contacto" },
+      { label: t.navbar.home, href: "/" },
+      { label: t.navbar.about, href: "/nosotros" },
+      { label: t.navbar.contact, href: "/contacto" },
     ],
-    []
+    [t] // Dependencia 't' para que se actualice al cambiar idioma
   )
+
+  const businessLines: DropItem[] = [
+    { title: t.navbar.lines.hockey, slug: "hockeystick-mx" },
+    { title: t.navbar.lines.accelerator, slug: "aceleradora-exponencial" },
+    { title: t.navbar.lines.incubator, slug: "incubadora-exponencial" },
+    { title: t.navbar.lines.unicorns, slug: "empresas-unicornio" },
+    { title: t.navbar.lines.funds, slug: "fondos-y-ma" },
+    { title: t.navbar.lines.university, slug: "universidad-hockeystick" },
+    { title: t.navbar.lines.hub, slug: "mkt-digital-hub" },
+  ]
 
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropOpen, setDropOpen] = useState(false)
@@ -91,7 +97,6 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* CAMBIO: Quitamos p-3, reducimos a h-14, aumentamos transparencia */}
       <nav className="border-b border-white/10 bg-black/85 backdrop-blur-md w-full">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           
@@ -99,7 +104,7 @@ export function Navbar() {
           <div className="flex shrink-0 items-center">
             <Link href="/" className="flex items-center">
               <img
-                className="h-7 w-auto object-contain invert brightness-0" // Logo un poco más pequeño (h-7)
+                className="h-7 w-auto object-contain invert brightness-0"
                 src="/hsmx.png"
                 alt="HSMX"
               />
@@ -107,7 +112,6 @@ export function Navbar() {
           </div>
 
           {/* Center: Desktop links */}
-          {/* Usamos absolute center trick */}
           <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-6">
             <Link
               href={nav[0].href}
@@ -138,7 +142,8 @@ export function Navbar() {
                 aria-expanded={dropOpen}
                 className="flex items-center gap-1 text-xs font-medium uppercase tracking-wide text-white/80 hover:text-white transition-colors py-4"
               >
-                Líneas de Negocio
+                {/* TRADUCCIÓN AQUÍ */}
+                {t.navbar.businessLines}
                 <ChevronDown
                   className={`h-3 w-3 transition-transform ${dropOpen ? "rotate-180" : ""}`}
                 />
@@ -146,7 +151,7 @@ export function Navbar() {
 
               <div
                 className={[
-                  "absolute left-1/2 mt-0 w-56 -translate-x-1/2 rounded-b-xl rounded-t-lg", // Ajuste de bordes
+                  "absolute left-1/2 mt-0 w-56 -translate-x-1/2 rounded-b-xl rounded-t-lg",
                   "bg-[#09090b] border border-white/10 p-1 shadow-xl",
                   "transition-all duration-200 origin-top",
                   dropOpen
@@ -183,8 +188,13 @@ export function Navbar() {
               href="/contacto"
               className="hidden sm:inline-flex items-center justify-center rounded-full bg-green-400 px-4 py-1.5 text-xs font-bold text-black hover:bg-gray-200 transition"
             >
-              <Send className="h-3 w-3 mr-1.5"/> Whatsapp
+              <Send className="h-3 w-3 mr-1.5"/> {t.navbar.cta}
             </Link>
+            
+            {/* Toggle de Idioma en Desktop */}
+            <div className="hidden sm:block">
+               <LanguageToggle />
+            </div>
 
             <button
               type="button"
@@ -199,7 +209,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile drawer (Mantenemos igual pero ajustamos el padding superior) */}
+      {/* Mobile drawer */}
       {mobileOpen && (
         <div className="md:hidden" role="dialog" aria-modal="true">
           <div
@@ -209,7 +219,7 @@ export function Navbar() {
 
           <div className="fixed inset-y-0 right-0 z-50 w-full max-w-[300px] bg-[#09090b] border-l border-white/10 shadow-2xl">
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-3 h-14">
-              <span className="text-sm font-bold text-white tracking-widest uppercase">Menú</span>
+              <span className="text-sm font-bold text-white tracking-widest uppercase">{t.navbar.menuTitle}</span>
               <button
                 ref={closeBtnRef}
                 type="button"
@@ -241,7 +251,7 @@ export function Navbar() {
                     onClick={() => setMobileLinesOpen((v) => !v)}
                     aria-expanded={mobileLinesOpen}
                   >
-                    Líneas de Negocio
+                    {t.navbar.businessLines}
                     <ChevronDown
                       className={`h-4 w-4 transition-transform ${mobileLinesOpen ? "rotate-180" : ""}`}
                     />
@@ -270,8 +280,13 @@ export function Navbar() {
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-emerald-500 transition"
                   onClick={() => setMobileOpen(false)}
                 >
-                  <Send className="h-4 w-4"/> Contactar por Whatsapp
+                  <Send className="h-4 w-4"/> {t.navbar.mobileCta}
                 </Link>
+                
+                {/* Toggle de Idioma en Mobile Menu */}
+                <div className="pt-6 flex justify-center">
+                    <LanguageToggle />
+                </div>
               </div>
             </div>
           </div>
