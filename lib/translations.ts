@@ -187,8 +187,8 @@ export const translations = {
         subtitle: "Lo que dicen quienes ya escalaron.",
         items: [
           {
-            quote: "Pasamos de tener solo una idea a un negocio en marcha 100% rentable y sólido bajo el método GROW.",
-            author: "Jorge Carballar",
+            quote: "El implante PIAEE en DinamitaPost nos ha transformado profundamente y nos ha hecho ver una serie de fortalezas y oportunidades de las que no estábamos conscientes. No dudo en decir que ahora somos una compañía mucho más sólida gracias a Hockeystick",
+            author: "Paulo Carballar",
             role: "Dinamita Post",
             image: "/people/persona3.jpeg"
           },
@@ -527,8 +527,8 @@ export const translations = {
         subtitle: "What those who have already scaled are saying.",
         items: [
           {
-            quote: "We went from having just an idea to a 100% profitable and solid running business under the GROW method.",
-            author: "Jorge Carballar",
+            quote: "The PIAEE implementation at DinamitaPost has profoundly transformed us and made us see a number of strengths and opportunities that we were not aware of. I have no hesitation in saying that we are now a much stronger company thanks to HockeyStick.",
+            author: "Paulo Carballar",
             role: "Dinamita Post",
             image: "/people/persona3.jpeg"
           },
