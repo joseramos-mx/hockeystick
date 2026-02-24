@@ -34,6 +34,9 @@ export function Navbar() {
     { title: t.navbar.lines.funds, slug: "fondos-y-ma" },
     { title: t.navbar.lines.university, slug: "universidad-hockeystick" },
     { title: t.navbar.lines.hub, slug: "mkt-digital-hub" },
+    { title: t.navbar.lines.swat, slug: "swat" },
+    { title: t.navbar.lines.calidad, slug: "calidad" },
+
   ]
 
   const [mobileOpen, setMobileOpen] = useState(false)

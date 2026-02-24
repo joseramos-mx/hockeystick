@@ -105,7 +105,7 @@ export function BusinessShowcase() {
         icon: Star, 
       },
       {
-        id: "ISO",
+        id: "calidad",
         label: t.businessShowcase.items.calidad.label,
         title: t.businessShowcase.items.calidad.title,
         description: t.businessShowcase.items.calidad.desc,

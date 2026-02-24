@@ -66,7 +66,9 @@ export const translations = {
           unicorns: "Empresas Unicornio",
           funds: "Fondos y M&A",
           university: "Universidad",
-          hub: "MKT Digital & Hub"
+          hub: "MKT Digital & Hub",
+          swat: "SWAT",
+          calidad: "ISO 9001"
         }
       },
       partner: {
@@ -372,7 +374,9 @@ export const translations = {
               unicorns: "Unicorn Companies",
               funds: "Funds & M&A",
               university: "University",
-              hub: "Digital MKT & Hub"
+              hub: "Digital MKT & Hub",
+              swat: "SWAT",
+              calidad: "ISO 9001 Certification"
             }
           },
       hero: {

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { getServiceBySlug } from "@/lib/business-data"
 import { Navbar } from "../../components/Navbar" 
 import { Footer } from "../../components/Footer"
-import { CheckCircle2, Zap, ArrowRight, Activity, BarChart3, Fingerprint, Layers, Construction } from "lucide-react"
+import { CheckCircle2, Zap, ShieldCheck, ArrowRight, Activity, BarChart3, Fingerprint, Layers, Construction } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "../../context/Languagecontext"
 
@@ -24,16 +24,33 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
   const { t, language } = useLanguage()
   const { slug } = React.use(params)
 
-  // 1. LÓGICA DE "PRÓXIMAMENTE"
-  // Definimos los títulos aquí manualmente para no depender de 'service'
-  const COMING_SOON_DATA: Record<string, string> = {
-    "swat-team": "SWAT Team",
-    "legal-fiscal": language === 'es' ? "Blindaje Corporativo" : "Corporate Shielding"
+  // 1. DEFINIR EL MAPA DE LOGOS
+  const logoMap: Record<string, string> = {
+    "hockeystick-mx": "/hsmxb.png", 
+    "aceleradora-exponencial": "/logos/agileinnovation.png",
+    "incubadora-exponencial": "/logos/job shop.png",
+    "empresas-unicornio": "/logos/unicornio.png",
+    "fondos-y-ma": "/logos/angel.png",
+    "universidad-hockeystick": "/logos/universidad.png",
+    "mkt-digital-hub": "/logos/digitalhub.png",
+    
+    // CORRECCIÓN AQUÍ: Usar "swat-team" para coincidir con la URL
+    "swat": "/logos/swat.png", 
+    "calidad": "/logos/iso9001.png",
   }
 
-  // Si es una página en construcción, entramos aquí y RETORNAMOS inmediatamente.
+  // Obtenemos el logo basado en el slug actual
+  const logoSrc = logoMap[slug] || "/job shop.png"
+
+  // 2. LÓGICA DE "PRÓXIMAMENTE"
+  const COMING_SOON_DATA: Record<string, string> = {
+    // CORRECCIÓN AQUÍ: Las llaves deben ser iguales al slug de la URL
+    "swat": "SWAT Team", 
+    "calidad": "Calidad y Procesos" 
+  }
+
   if (COMING_SOON_DATA[slug]) {
-    const title = COMING_SOON_DATA[slug]; // Usamos la variable local 'title', NO 'service.title'
+    const title = COMING_SOON_DATA[slug]; 
     
     return (
       <div className="min-h-screen bg-[#020408] text-white font-sans selection:bg-blue-500/30 flex flex-col">
@@ -45,17 +62,26 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02),transparent_70%)] pointer-events-none" />
 
-            <div className="relative z-10 max-w-3xl text-center">
+            <div className="relative z-10 max-w-3xl text-center flex flex-col items-center">
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-widest text-blue-400 uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-1.5 text-xs font-bold tracking-widest text-yellow-400 uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <Construction className="h-3.5 w-3.5" /> 
                     {language === 'es' ? 'En Construcción' : 'Under Construction'}
                 </div>
 
                 {/* Título */}
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-100">
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-8 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-100">
                     {title} 
                 </h1>
+
+                {/* LOGO DE LA LÍNEA (Próximamente) */}
+                <div className="relative z-10 h-32 sm:h-40 w-auto p-6 rounded-[2rem] bg-white backdrop-blur-xl border border-white/10 flex items-center justify-center mb-8 animate-in zoom-in duration-700 delay-200">
+                  <img 
+                      src={logoSrc} 
+                      alt={`${title} Logo`}
+                      className={`h-full w-auto object-contain drop-shadow-sm ${slug === 'calidad' ? '' : ''}`} 
+                  />
+                </div>
 
                 {/* Descripción */}
                 <p className="text-xl sm:text-2xl text-slate-400 font-light mb-12 leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
@@ -88,34 +114,18 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
     )
   }
 
-  // 2. AHORA SÍ: CARGA DE DATOS PARA PÁGINAS NORMALES
-  // El código llega aquí SOLO si NO es una página en construcción.
+  // 3. CARGA DE DATOS PARA PÁGINAS NORMALES
   const service = getServiceBySlug(slug, language)
 
   if (!service) {
     return notFound()
   }
 
-  const logoMap: Record<string, string> = {
-    "hockeystick-mx": "/hsmxb.png", 
-    "aceleradora-exponencial": "/logos/agileinnovation.png",
-    "incubadora-exponencial": "/logos/job shop.png",
-    "empresas-unicornio": "/logos/unicornio.png",
-    "fondos-y-ma": "/logos/angel.png",
-    "universidad-hockeystick": "/logos/universidad.png",
-    "mkt-digital-hub": "/logos/digitalhub.png",
-    // Logos nuevos
-    "swat-team": "/logos/swat.png",
-    "legal-fiscal": "/logos/legal.png",
-  }
-
-  const logoSrc = logoMap[slug] || "/job shop.png"
-
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
 
-      {/* --- 1. HERO SECTION --- */}
+      {/* --- 1. HERO SECTION (RESTAURADO COMPLETO) --- */}
       <section className="relative pt-32 pb-16 sm:pt-40 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0 pointer-events-none">
              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[radial-gradient(ellipse_60%_60%_at_50%_0%,rgba(59,130,246,0.08),transparent)]" />
@@ -129,10 +139,12 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                {t.servicePage.badge}
             </div>
             
+            {/* Título restaurado */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight text-slate-900 mb-8 leading-[1.1]">
               {service.title}
             </h1>
             
+            {/* Descripción restaurada */}
             <p className="text-xl sm:text-2xl text-slate-500 max-w-2xl mx-auto mb-16 font-light leading-relaxed">
               {service.shortDesc}
             </p>
@@ -143,7 +155,6 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     <img 
                         src={logoSrc} 
                         alt={`${service.title} Logo`}
-                        // Tu lógica condicional para el logo placeholder se puede poner aquí si la necesitas
                         className="h-full w-auto object-contain drop-shadow-sm" 
                     />
                 </div>
