@@ -3,45 +3,93 @@
 import React from "react"
 import { notFound } from "next/navigation"
 import { getServiceBySlug } from "@/lib/business-data"
-import { Navbar } from "../../components/Navbar"
+import { Navbar } from "../../components/Navbar" 
 import { Footer } from "../../components/Footer"
-import { CheckCircle2, Zap, ShieldCheck, ArrowRight, Activity, BarChart3, Fingerprint, Layers } from "lucide-react"
+import { CheckCircle2, Zap, ArrowRight, Activity, BarChart3, Fingerprint, Layers, Construction } from "lucide-react"
 import Link from "next/link"
-// 1. IMPORTAR HOOK
 import { useLanguage } from "../../context/Languagecontext"
 
 // --- PALETA DE COLORES DINÁMICA ---
 const colorPalette = [
-  { // Azul
-    lightBg: "bg-blue-50", lightText: "text-blue-600", lightBorder: "border-blue-100",
-    darkBg: "bg-blue-950/30", darkText: "text-blue-400", darkBorder: "border-blue-500/30", darkGlow: "shadow-blue-500/20"
-  },
-  { // Violeta
-    lightBg: "bg-violet-50", lightText: "text-violet-600", lightBorder: "border-violet-100",
-    darkBg: "bg-violet-950/30", darkText: "text-violet-400", darkBorder: "border-violet-500/30", darkGlow: "shadow-violet-500/20"
-  },
-  { // Cian
-    lightBg: "bg-cyan-50", lightText: "text-cyan-600", lightBorder: "border-cyan-100",
-    darkBg: "bg-cyan-950/30", darkText: "text-cyan-400", darkBorder: "border-cyan-500/30", darkGlow: "shadow-cyan-500/20"
-  },
-  { // Esmeralda
-    lightBg: "bg-emerald-50", lightText: "text-emerald-600", lightBorder: "border-emerald-100",
-    darkBg: "bg-emerald-950/30", darkText: "text-emerald-400", darkBorder: "border-emerald-500/30", darkGlow: "shadow-emerald-500/20"
-  },
-  { // Naranja
-    lightBg: "bg-orange-50", lightText: "text-orange-600", lightBorder: "border-orange-100",
-    darkBg: "bg-orange-950/30", darkText: "text-orange-400", darkBorder: "border-orange-500/30", darkGlow: "shadow-orange-500/20"
-  },
+  { lightBg: "bg-blue-50", lightText: "text-blue-600", lightBorder: "border-blue-100", darkBg: "bg-blue-950/30", darkText: "text-blue-400", darkBorder: "border-blue-500/30", darkGlow: "shadow-blue-500/20" },
+  { lightBg: "bg-violet-50", lightText: "text-violet-600", lightBorder: "border-violet-100", darkBg: "bg-violet-950/30", darkText: "text-violet-400", darkBorder: "border-violet-500/30", darkGlow: "shadow-violet-500/20" },
+  { lightBg: "bg-cyan-50", lightText: "text-cyan-600", lightBorder: "border-cyan-100", darkBg: "bg-cyan-950/30", darkText: "text-cyan-400", darkBorder: "border-cyan-500/30", darkGlow: "shadow-cyan-500/20" },
+  { lightBg: "bg-emerald-50", lightText: "text-emerald-600", lightBorder: "border-emerald-100", darkBg: "bg-emerald-950/30", darkText: "text-emerald-400", darkBorder: "border-emerald-500/30", darkGlow: "shadow-emerald-500/20" },
+  { lightBg: "bg-orange-50", lightText: "text-orange-600", lightBorder: "border-orange-100", darkBg: "bg-orange-950/30", darkText: "text-orange-400", darkBorder: "border-orange-500/30", darkGlow: "shadow-orange-500/20" },
 ];
 
 const getColor = (i: number) => colorPalette[i % colorPalette.length];
 
 export default function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
-  // 2. USAR HOOK
-  const { t, language } = useLanguage() // Nota: necesitamos 'language' también
+  const { t, language } = useLanguage()
   const { slug } = React.use(params)
-  
-  // 3. OBTENER SERVICIO BASADO EN IDIOMA
+
+  // 1. LÓGICA DE "PRÓXIMAMENTE"
+  // Definimos los títulos aquí manualmente para no depender de 'service'
+  const COMING_SOON_DATA: Record<string, string> = {
+    "swat-team": "SWAT Team",
+    "legal-fiscal": language === 'es' ? "Blindaje Corporativo" : "Corporate Shielding"
+  }
+
+  // Si es una página en construcción, entramos aquí y RETORNAMOS inmediatamente.
+  if (COMING_SOON_DATA[slug]) {
+    const title = COMING_SOON_DATA[slug]; // Usamos la variable local 'title', NO 'service.title'
+    
+    return (
+      <div className="min-h-screen bg-[#020408] text-white font-sans selection:bg-blue-500/30 flex flex-col">
+        <Navbar />
+        
+        <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden px-6 min-h-[90vh] py-32">
+            
+            {/* Fondo decorativo */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[800px] h-[500px] sm:h-[800px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02),transparent_70%)] pointer-events-none" />
+
+            <div className="relative z-10 max-w-3xl text-center">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-xs font-bold tracking-widest text-blue-400 uppercase mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <Construction className="h-3.5 w-3.5" /> 
+                    {language === 'es' ? 'En Construcción' : 'Under Construction'}
+                </div>
+
+                {/* Título */}
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-100">
+                    {title} 
+                </h1>
+
+                {/* Descripción */}
+                <p className="text-xl sm:text-2xl text-slate-400 font-light mb-12 leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
+                    {language === 'es' 
+                        ? "Estamos preparando una experiencia disruptiva para esta división. Muy pronto podrás acceder a nuestros servicios de élite."
+                        : "We are preparing a disruptive experience for this division. Very soon you will be able to access our elite services."
+                    }
+                </p>
+
+                {/* CTA */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+                    <Link href="/contacto">
+                        <button className="group inline-flex items-center justify-center gap-3 rounded-full bg-white text-black px-8 py-4 text-sm font-bold shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:scale-105 transition-all">
+                            {language === 'es' ? 'Notificarme al lanzamiento' : 'Notify me at launch'}
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </button>
+                    </Link>
+                    
+                    <Link href="/">
+                        <button className="inline-flex items-center justify-center rounded-full border border-white/10 bg-transparent px-8 py-4 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+                            {language === 'es' ? 'Volver al inicio' : 'Back to home'}
+                        </button>
+                    </Link>
+                </div>
+            </div>
+        </main>
+
+        <Footer />
+      </div>
+    )
+  }
+
+  // 2. AHORA SÍ: CARGA DE DATOS PARA PÁGINAS NORMALES
+  // El código llega aquí SOLO si NO es una página en construcción.
   const service = getServiceBySlug(slug, language)
 
   if (!service) {
@@ -56,7 +104,9 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
     "fondos-y-ma": "/logos/angel.png",
     "universidad-hockeystick": "/logos/universidad.png",
     "mkt-digital-hub": "/logos/digitalhub.png",
-    "swat": "/logos/swat.png",
+    // Logos nuevos
+    "swat-team": "/logos/swat.png",
+    "legal-fiscal": "/logos/legal.png",
   }
 
   const logoSrc = logoMap[slug] || "/job shop.png"
@@ -93,6 +143,7 @@ export default function ServicePage({ params }: { params: Promise<{ slug: string
                     <img 
                         src={logoSrc} 
                         alt={`${service.title} Logo`}
+                        // Tu lógica condicional para el logo placeholder se puede poner aquí si la necesitas
                         className="h-full w-auto object-contain drop-shadow-sm" 
                     />
                 </div>

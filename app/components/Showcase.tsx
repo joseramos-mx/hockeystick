@@ -95,6 +95,24 @@ export function BusinessShowcase() {
         meta: t.businessShowcase.items.pmo.meta,
         icon: Star, 
       },
+      {
+        id: "swat",
+        label: t.businessShowcase.items.swat.label,
+        title: t.businessShowcase.items.swat.title,
+        description: t.businessShowcase.items.swat.desc,
+        image: "lineas/compass.png",
+        meta: t.businessShowcase.items.swat.meta,
+        icon: Star, 
+      },
+      {
+        id: "ISO",
+        label: t.businessShowcase.items.calidad.label,
+        title: t.businessShowcase.items.calidad.title,
+        description: t.businessShowcase.items.calidad.desc,
+        image: "lineas/compass.png",
+        meta: t.businessShowcase.items.calidad.meta,
+        icon: Star, 
+      }
     ],
     [t] // Dependencia importante: recalcula cuando cambia 't'
   )

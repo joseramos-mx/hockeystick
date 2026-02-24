@@ -158,6 +158,18 @@ export const translations = {
             title: "Agile Office",
             desc: "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
             meta: "Gestión • Ejecución"
+          },
+          swat: {
+            label: "SWAT TRABAJOS ESPECIALES",
+            title: "Agile Office",
+            desc: "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
+            meta: "Gestión • Ejecución"
+          },
+          calidad: {
+            label: "CALIDAD Y CERTIFICACIONES ISO",
+            title: "ISO 9001",
+            desc: "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
+            meta: "Gestión • Ejecución"
           }
         }
       },
@@ -498,6 +510,18 @@ export const translations = {
             title: "Agile Office",
             desc: "Agile project management office to ensure flawless strategy execution.",
             meta: "Management • Execution"
+          },
+          swat: {
+            label: "SWAT TRABAJOS ESPECIALES",
+            title: "Agile Office",
+            desc: "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
+            meta: "Gestión • Ejecución"
+          },
+          calidad: {
+            label: "CALIDAD Y CERTIFICACIONES ISO",
+            title: "ISO 9001",
+            desc: "Oficina de gestión de proyectos ágiles para asegurar la ejecución impecable de la estrategia.",
+            meta: "Gestión • Ejecución"
           }
         }
       },
